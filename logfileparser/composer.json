@@ -1,0 +1,6 @@
+{
+    "require": {
+        "ramsey/uuid": "^3.8",
+        "monolog/monolog": "^1.24"
+    }
+}
