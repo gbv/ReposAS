@@ -17,6 +17,7 @@ class MyCoReObject {
 	function getAllIdentifier() {
 		$ret = array();
 		if ($this->parentid) $ret[]=$this->parentid;
+                if ($this->objectid) $ret[]=$this->objectid;
 		if ($this->urn) $ret[]=$this->urn;
 		if ($this->doi) $ret[]="doi:".$this->doi;
 		return $ret;
@@ -153,7 +154,7 @@ function getDOMByURL ($url) {
         $count = 0;
         @$load = $doc->load($url,LIBXML_NOWARNING);
         while ($count < 10 && ! $load ) {
-                fwrite(STDERR, "Error: unable to get Data from ".$url.". Try to reconnect(".$count.")\n");
+                //fwrite(STDERR, "Error: unable to get Data from ".$url.". Try to reconnect(".$count.")\n");
                 usleep(2000);
                 @$load = $doc->load($url,LIBXML_NOWARNING);
                 $count ++;
@@ -169,95 +170,65 @@ function getDOMByURL ($url) {
 
 
 class MIRToolbox {
-	var $dbh=false;
-	var $config=false;
+    var $dbh=false;
+    var $config=false;
 
-	var $MyCoReObjectFactory=null;
-	var $MyCoReDerivateFactory=null;
+    var $MyCoReObjectFactory=null;
+    var $MyCoReDerivateFactory=null;
 
 	
-	/**
-	 * prepares database connection and instance variables
-	 * @param $config config to be used
-	 * @param $logger optional: set custom logger
-	 */
-	function __construct($config, $logger=false) {
-		$this->config=$config;
-		$this->logger=$logger;
-		$this->cache=array();
-		$this->lastDerivate="";
-		$this->MyCoReDerivateFactory = new MyCoReDerivateFactory($config);
-		$this->MyCoReObjectFactory = new MyCoReObjectFactory($config);
-	}
+    /**
+     * prepares database connection and instance variables
+     * @param $config config to be used
+     * @param $logger optional: set custom logger
+     */
+    function __construct($config, $logger=false) {
+        $this->config=$config;
+	$this->logger=$logger;
+	$this->cache=array();
+	$this->lastDerivate="";
+	$this->MyCoReDerivateFactory = new MyCoReDerivateFactory($config);
+	$this->MyCoReObjectFactory = new MyCoReObjectFactory($config);
+    }
 
   function addIdentifier(& $reposasLogline) {
       $path=$reposasLogline->URL;
       $referer=$reposasLogline->Referer;
-      $id_list=array();
-      $types=array();
       if (preg_match('/\/rsc\/stat\/([^\/]+_[^\/]+_[0-9]{8}).css$/', $path, $match)) {
           // The Fake css download 
-          fwrite(STDERR, "Match - fake css:".$path."\n"); 
-          $object=$this->MyCoReObjectFactory->create($match[1]);
-          if ($object) {
-            $reposasLogline->Identifier=$object->getAllIdentifier();
-            // TO Do 'types'=>array('abstract')
-            return (true);
-          }
-      } elseif (preg_match('/\/receive\/([^\/]+_[^\/]+_[0-9]{8})(;jsessionid.+|$)/', $path, $match)) {
-      // Metadatapage docportal and citelink
-          fwrite(STDERR, "Match - receive:".$path."\n");
+          //fwrite(STDERR, "Match - fake css:".$path."\n"); 
           $object=$this->MyCoReObjectFactory->create($match[1]);
           if ($object) {
               $reposasLogline->Identifier=$object->getAllIdentifier();
-              // TO Do 'types'=>array('abstract')
+              $reposasLogline->Subjects[]="oas:content:counter_abstract";
+              return (true);
+          }
+      } elseif (preg_match('/\/receive\/([^\/]+_[^\/]+_[0-9]{8})(;jsessionid.+|$)/', $path, $match)) {
+          // Metadatapage docportal and citelink
+          //fwrite(STDERR, "Match - receive:".$path."\n");
+          $object=$this->MyCoReObjectFactory->create($match[1]);
+          if ($object) {
+              $reposasLogline->Identifier=$object->getAllIdentifier();
+              $reposasLogline->Subjects[]="oas:content:counter_abstract";
               return (true);
           }
       } elseif ($this->config['oldMirLogs'] === true && preg_match('/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',$path, $match)) {
-      // Forces one searchrenult so display Metdadatapage
-      // !!! possible: id and objectType not requested
-      /*fwrite(STDERR, "Match - old searchresult:".$path."\n");
-                        $url=$this->config['url_prefix'].$match[0];
-                        $url=str_replace(array("&XSL.Style=browse","&wt=xml"), "", $url);
-                        $url.="&wt=json";
-                        $json = file_get_contents($url);
-                        $json = json_decode($json,true);
-                        if (! empty($json['grouped']['returnId']['groups'][0]['doclist']['docs'][0]['id'])) { 
-				// Successfull grouped search by returnId 
-                        	$id_list[]=$this->config['oai_prefix'].$json['grouped']['returnId']['groups'][0]['doclist']['docs'][0]['id'];
-				$types[]='abstract';
-			} elseif (isset($json['grouped']['returnId']['groups']) && count($json['grouped']['returnId']['groups']) == 0) {
-				// Empty grouped search by returnId
-				$types[]='any';
-			} elseif (!empty($json['response']['docs'][0]['id'])) {
-				// Successfull search
-				$id_list[]=$this->config['oai_prefix'].$json['response']['docs'][0]['id'];
-				$types[]='abstract';
-			} elseif (isset($json['response']['docs']) && count($json['response']['docs'] == 0) ) {
-				// Empty search
-				$types[]='any';
-			} else {
-				$id_list[]="Error(3a2g5d7j) by geting Data From JSON! Wrong path?";
-				//$id_list[]=print_r($json,true);
-				$types[]='abstract';
-			}
-        */
           die ("oldMirLogs not longer supported\n");
       } elseif (preg_match('/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/', $path, $match)) {
           //Fulltext download
-          fwrite(STDERR, "Match - MCRFileNodeServlet:".$path."\n");
-          fwrite(STDERR, "Derivat (".$match[1].")");
+          //fwrite(STDERR, "Match - MCRFileNodeServlet:".$path."\n");
+          //fwrite(STDERR, "Derivat (".$match[1].")");
           if (isset($match[3]) && !(strpos ($match[3],"?view") === false)) {  // If intern Dokviewer
-              fwrite(STDERR, "nur Ansicht.\n");
+              //fwrite(STDERR, "nur Ansicht.\n");
               return false;
 	  }
           if (strpos($referer,"pdf.worker.js") !== false || strpos($referer,"pdf.min.worker.js") !== false ) {
-              fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
+              //fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
               return false;
 	  }  
           $derivateid=$match[1];
           if ($derivateid == $this->lastDerivate ) {
-              fwrite(STDERR, "doppeltes Derivate).\n");
+              //fwrite(STDERR, "doppeltes Derivate).\n");
               return false;
 	  }
           $this->lastDerivate=$derivateid;
@@ -265,45 +236,46 @@ class MIRToolbox {
 	  if ($derivate == null)  return false;	
 	  $maindoc = $derivate->maindoc;
 	  $filename = urldecode($match[2]);
-	  fwrite(STDERR, $maindoc." - ".$filename."\n");
+	  //fwrite(STDERR, $maindoc." - ".$filename."\n");
 	  if ($maindoc == $filename) {
-	      // TO DO Type of access $types[] = 'fulltext';
+              $reposasLogline->Subjects[]="oas:content:counter";
  	      $reposasLogline->Identifier[] = $derivateid;
 				
 	      // Add objectid
 	      $objectid = $derivate->objectid;
+              //fwrite(STDERR, " ObjectID: ".$objectid."\n");
               $object=$this->MyCoReObjectFactory->create($objectid);
 	      $reposasLogline->Identifier = array_merge($object->getAllIdentifier(),$reposasLogline->Identifier);
 
 	      //Add URN
 	      $urn = $derivate->urn;
-	      if ($urn) $reposasLogline->Identifier = $urn;
+	      if ($urn) $reposasLogline->Identifier[] = $urn;
               return true;
           } else {
-	      fwrite(STDERR, "nicht das Hauptdokument\n");
-	      //$types[]='any';
+	      //fwrite(STDERR, "nicht das Hauptdokument\n");
               return false;
 	  }
       } elseif (preg_match('/\/MCRZipServlet\/([^\/]+_derivate_[0-9]+)(;jsessionid)?.*/', $path, $match)) {
-          fwrite(STDERR, "Match - MCRZipServlet:".$path."\n");
-          fwrite(STDERR, "Derivate (".$match[1].")\n");
+          //fwrite(STDERR, "Match - MCRZipServlet:".$path."\n");
+          //fwrite(STDERR, "Derivate (".$match[1].")\n");
           $derivateid=$match[1];
-          // To DO $types[] = 'fulltext';
+          $reposasLogline->Subjects[]="oas:content:counter";
           $derivate=$this->MyCoReDerivateFactory->create($derivateid);
-          $reposasLogline->Identifier = $derivateid;
+          $reposasLogline->Identifier[] = $derivateid;
           $objectid = $derivate->objectid;
+          //fwrite(STDERR, "Object:".$objectid."\n");
           $object=$this->MyCoReObjectFactory->create($objectid);
           $reposasLogline->Identifier = array_merge($object->getAllIdentifier(),$reposasLogline->Identifier);
           //Add URN
           $urn = $derivate->urn;
           if ($urn) $reposasLogline->Identifier = $urn;
       } elseif (preg_match('/\/rsc\/pdf\/([^\/]+_derivate_[0-9]+)[?]pages=1-\d+$/', $path, $match)) {
-          fwrite(STDERR, "Match - PDF Download:".$path."\n");
-          fwrite(STDERR, "Derivate (".$match[1].")\n");
+          //fwrite(STDERR, "Match - PDF Download:".$path."\n");
+          //fwrite(STDERR, "Derivate (".$match[1].")\n");
           $derivateid=$match[1];
-          // TO DO Subjects $types[] = 'fulltext';
+          $reposasLogline->Subjects[]="oas:content:counter";
           $derivate=$this->MyCoReDerivateFactory->create($derivateid);
-	  $reposasLogline->Identifier = $derivateid;
+	  $reposasLogline->Identifier[] = $derivateid;
           $objectid = $derivate->objectid;
           $object=$this->MyCoReObjectFactory->create($objectid);
           $reposasLogline->Identifier = array_merge($object->getAllIdentifier(),$reposasLogline->Identifier);

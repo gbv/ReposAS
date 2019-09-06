@@ -15,7 +15,8 @@ while (! feof(STDIN)) {
           $mirToolBox->addIdentifier($logLine);
           echo ($logLine."\n");
         } else {
-            die("Error: malformed Logline".$line."\n");
+            //die("Error: malformed Logline".$line."\n");
+            // TO DO Goog logging
         }
     }
 }

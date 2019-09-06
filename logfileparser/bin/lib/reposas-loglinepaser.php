@@ -92,21 +92,21 @@ class ReposasLogfileParser {
     function __construct() {
         //$SubLoglineparser=$subLoglineParser;
     
-        $this->RegExp='(.*) ';
+        $this->RegExp='([^ ]*) ';
         //$this->RegExp.='(unknown|-|\d+\.\d+\.\d+\.\d+(, unknown)?|([A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}) ';      // IP Adress
-        $this->RegExp.='(.*) ';                              // IP Adress
-        $this->RegExp.='(.*) ';                              // Remote logname
-        $this->RegExp.='(.*) ';                              // Remote user
-        $this->RegExp.='\[(.*)\] ';                          // Time the request was received
-        $this->RegExp.='"(.*) (.*) (HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL, http Protokoll
-        $this->RegExp.='(\d\d\d) ';                          // http Status Code
-        $this->RegExp.='([0-9-]+) ';                         // Size of response in bytes
-        $this->RegExp.='"([^"]*)" ';                         // Referer
-        $this->RegExp.='"([^"]*)"';                          // User Agent
+        $this->RegExp.='([^ ]*) ';                                 // IP Adress
+        $this->RegExp.='([^ ]*) ';                                 // Remote logname
+        $this->RegExp.='([^ ]*) ';                                 // Remote user
+        $this->RegExp.='\[([^\]]*)\] ';                            // Time the request was received
+        $this->RegExp.='"([^ ]*) ([^ ]*) (HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL, http Protokoll
+        $this->RegExp.='(\d\d\d) ';                                // http Status Code
+        $this->RegExp.='([0-9-]+) ';                               // Size of response in bytes
+        $this->RegExp.='"([^"]*)" ';                               // Referer
+        $this->RegExp.='"([^"]*)"';                             // User Agent
         $this->RegExp.=' ';
-        $this->RegExp.='(.*) ';                              // SessionID
-        $this->RegExp.='(\[[^\]]*\]) ';                      // Identifier
-        $this->RegExp.='(\[[^\]]*\])';                           // Subjects
+        $this->RegExp.='(.*) ';                                    // SessionID
+        $this->RegExp.='(\[[^\]]*\]) ';                            // Identifier
+        $this->RegExp.='(\[[^\]]*\])';                             // Subjects
     }
 
     public function parse($line,& $logline) {

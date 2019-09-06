@@ -18,7 +18,7 @@ while (! feof(STDIN)) {
             $str.='}';
             echo $str."\n";
         } else {
-            die("Error: malformed Logline - abort Processing.\n");
+            //die("Error: malformed Logline - abort Processing.\n");
         }
     }
 }
