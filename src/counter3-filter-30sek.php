@@ -26,4 +26,3 @@ class Counter3Filter30sek {
         $this->lastHits[$unixtime]['path']=$path;
     }
 }
-?>

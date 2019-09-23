@@ -22,5 +22,3 @@ while (! feof(STDIN)) {
         }
     }
 }
-
-?>

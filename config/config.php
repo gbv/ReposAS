@@ -17,5 +17,3 @@ $config=array(
     'datadir' => '/mcr/repper/data'
 
   );
-
-?>

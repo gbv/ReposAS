@@ -23,5 +23,3 @@ while (! feof(STDIN)) {
         }
     }
 }
-
-?>

@@ -58,4 +58,3 @@ while (! feof(STDIN)) {
 
   }
 }
-
