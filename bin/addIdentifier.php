@@ -1,9 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require_once __DIR__.'/lib/mir-identifier.php';
-require_once __DIR__.'/lib/reposas-loglinepaser.php';
-require_once __DIR__.'/../config.php';
+require_once __DIR__.'../vendor/autoload.php';
 
 $reposasLoglineParser=new ReposasLogfileParser();
 $mirToolBox=new MIRToolbox ($config);

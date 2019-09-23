@@ -1,10 +1,8 @@
 #!/usr/bin/php
 <?php
 
-require_once __DIR__.'/../config.php';
-require_once __DIR__.'/lib/reposas-loglinepaser.php';
-require_once __DIR__.'/lib/ReposasFilterRobots.php';
-require_once __DIR__.'/lib/Counter3Filter30sek.php';
+require_once __DIR__.'/../config/config.php';
+require_once __DIR__.'../vendor/autoload.php';
 
 $reposasLoglineParser= new ReposasLogfileParser();
 $reposasFilterRobots= new ReposasFilterRobots ();
