@@ -3,8 +3,8 @@
 
 require_once __DIR__.'/../config.php';
 require_once __DIR__.'/lib/reposas-loglinepaser.php';
-require_once __DIR__.'/lib/reposas-filter-robots.php';
-require_once __DIR__.'/lib/counter3-filter-30sek.php';
+require_once __DIR__.'/lib/ReposasFilterRobots.php';
+require_once __DIR__.'/lib/Counter3Filter30sek.php';
 
 $reposasLoglineParser= new ReposasLogfileParser();
 $reposasFilterRobots= new ReposasFilterRobots ();
