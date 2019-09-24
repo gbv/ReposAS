@@ -1,4 +1,5 @@
 <?php
+namespace ReposAS;
 
 class ReposasLogline extends Logline{
     public $Identifier;

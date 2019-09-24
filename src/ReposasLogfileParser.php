@@ -1,4 +1,5 @@
 <?php
+namespace ReposAS;
 
 class ReposasLogfileParser {
     public $RegExp;

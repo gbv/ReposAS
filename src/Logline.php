@@ -1,5 +1,7 @@
 <?php
 
+namespace ReposAS;
+
 class Logline {
     public $IP;
     public $RemoteLogname;
