@@ -11,3 +11,6 @@ vendor
 
 # ignore logs
 logs
+
+# ignore build-files
+build
