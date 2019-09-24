@@ -1,8 +1,9 @@
 <?php
 namespace ReposASTest;
+
 use ReposAS\Logline;
 
-class LoglineTest extends PHPUnit\Framework\TestCase
+class LoglineTest extends \PHPUnit\Framework\TestCase
 {
     public function testString()
     {

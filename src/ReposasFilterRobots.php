@@ -4,7 +4,7 @@ namespace ReposAS;
 class ReposasFilterRobots {
 
     var $Robots=null;
-    var $Robots_file_name=__DIR__.'/COUNTER_Robots_list.json';
+    var $Robots_file_name=__DIR__.'/../config/COUNTER_Robots_list.json';
 
     function __construct() {
         $Robots_file=file_get_contents($this->Robots_file_name);

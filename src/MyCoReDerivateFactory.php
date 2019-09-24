@@ -12,7 +12,7 @@ class MyCoReDerivateFactory {
 
     public function create ($derivateid) {
         if (isset ($this->cache[$derivateid])) return $this->cache[$derivateid];
-        $doc = new DOMDocument();
+        $doc = new \DOMDocument();
         //$doc->load($this->config['url_prefix']."/receive/".$derivateid."?XSL.Style=xml");
         if ($this->config['getmethod']=='file') {
             $path=$this->config['datadir'].'/'.$this->getFilePathById($derivateid).'/'.$derivateid.'.xml';
@@ -21,13 +21,13 @@ class MyCoReDerivateFactory {
         }
         $doc = $this->getDOMByURL($path);
         if ($doc == null) return null;
-        $xpath = new DOMXpath($doc);
+        $xpath = new \DOMXpath($doc);
         $elements = $xpath->query("/mycorederivate/derivate/internals[@class='MCRMetaIFS']/internal");
         $element = $elements->item(0);
         $maindoc = $element->getAttribute("maindoc");
         $elements = $xpath->query("/mycorederivate/derivate/linkmetas[@class='MCRMetaLinkID']/linkmeta");
         if ($elements->length>1) {
-            fwrite(STDERR, "Warning - (".$derivateId.") more then one parent.\n" );
+            fwrite(STDERR, "Warning - (".$derivateid.") more then one parent.\n" );
         }
         $element = $elements->item(0);
         $objectid = $element->getAttribute("xlink:href");
@@ -38,7 +38,7 @@ class MyCoReDerivateFactory {
         return $this->cache[$derivateid];
     }
 
-    function getFilePathById($id) {
+    public static function getFilePathById($id) {
         if (preg_match('/([^\/]+)_([^\/]+)_([0-9]{4})([0-9]{2})[0-9]{2}$/', $id, $match)) {
             $project=$match[1];
             $type=$match[2];
@@ -50,8 +50,8 @@ class MyCoReDerivateFactory {
         return "metadata/".$project."/".$type."/".$dig4."/".$dig2;
     }
 
-    function getDOMByURL ($url) {
-        $doc = new DOMDocument();
+    public static function getDOMByURL($url) {
+        $doc = new \DOMDocument();
         $count = 0;
         @$load = $doc->load($url,LIBXML_NOWARNING);
         while ($count < 10 && ! $load ) {

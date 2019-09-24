@@ -2,10 +2,10 @@
 $config=array(
   
     // Logfiles of the logfileparser
-    'logdir'=>'/mcr/repper/reposas/logfileparser/logs',
+    'logdir'=>'../logs',
 
     // Directory where the accesslogs are located
-    'accesslogdir'=>'/mcr/repper/reposas/accesslogs',
+    'accesslogdir'=>'../accesslogs',
 
     // Enable parsing old MIR logs before css load in deltailview
     'oldMirLogs' => false,
@@ -14,6 +14,6 @@ $config=array(
     'getmethod' => 'file',
 
     // Datadir - location of XML metadata
-    'datadir' => '/mcr/repper/data'
+    'datadir' => '../data'
 
   );

@@ -15,17 +15,17 @@ class MyCoReObjectFactory {
         $parentid=null;
         $doi=null;
         $urn=null;
-        $doc = new DOMDocument();
+        $doc = new \DOMDocument();
         if ($this->config['getmethod']=='file') {
-            $path=$this->config['datadir'].'/'.getFilePathById($objectid).'/'.$objectid.'.xml';
+            $path=$this->config['datadir'].'/'.MyCoReDerivateFactory::getFilePathById($objectid).'/'.$objectid.'.xml';
         } else {
             $path=$this->config['url_prefix']."/api/v1/objects/".$objectid;
         }
-        $doc = getDOMByURL($path);
+        $doc = MyCoReDerivateFactory::getDOMByURL($path);
         if ($doc == null) return null;
         $nodename = $doc->documentElement->nodeName;
         if ($nodename=="mycoreobject") {
-            $xpath = new DOMXpath($doc);
+            $xpath = new \DOMXpath($doc);
             $elements = $xpath->query("/mycoreobject/structure/parents/parent");
             $element = $elements->item(0);
             if ($element) {
