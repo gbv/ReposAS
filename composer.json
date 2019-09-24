@@ -30,13 +30,13 @@
 
   "scripts": {
     "check": [
-      "@cs-check",
-      "@test"
+      "@test",
+      "@cs-check"
     ],
     "check-full": [
       "@prepare",
-      "@cs-report",
-      "@test-coverage"
+      "@test-coverage",
+      "@cs-report"
     ],
     "prepare": "mkdir -p build",
     "test": "phpunit --colors=always --log-junit build/phpunit.xml test/",
