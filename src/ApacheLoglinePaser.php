@@ -18,7 +18,7 @@ class ApacheLoglinePaser {
     }
 
     public function parse($line,& $logline) {
-        $RegExp2= '/^'.$RegExp.'/';
+        $RegExp2= '/^'.$this->RegExp.'/';
         if (! $logline)  {
             $logline=new Logline();
             echo "Error keine  Logline\n";

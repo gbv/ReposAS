@@ -5,7 +5,10 @@
 
   "require": {
     "ramsey/uuid": "^3.8",
-    "monolog/monolog": "^1.24"
+    "monolog/monolog": "^1.24",
+    "ext-DOM": "*",
+    "ext-libxml": "*",
+    "ext-json": "*"
   },
 
   "require-dev": {
