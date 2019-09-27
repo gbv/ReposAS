@@ -23,7 +23,7 @@ class ApacheLoglinePaser
     public function parse($line, & $logline)
     {
         $RegExp2 = '/^' . $this->RegExp . '/';
-        if (!$logline) {
+        if (! $logline) {
             $logline = new Logline();
             echo "Error keine  Logline\n";
         }

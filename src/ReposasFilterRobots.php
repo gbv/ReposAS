@@ -33,9 +33,9 @@ class ReposasFilterRobots
 
                 if (in_array("oas:content:counter_abstract", $reposasLogline->Subjects)) {
                     if (($key = array_search(
-                            "oas:content:counter_abstract",
-                            $reposasLogline->Subjects
-                        )) !== false) {
+                        "oas:content:counter_abstract",
+                        $reposasLogline->Subjects
+                    )) !== false) {
                         unset($reposasLogline->Subjects[$key]);
                     }
 

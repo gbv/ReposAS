@@ -64,10 +64,10 @@ class MIRToolbox
                 return true;
             }
         } elseif ($this->config['oldMirLogs'] === true && preg_match(
-                '/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',
-                $path,
-                $match
-            )) {
+            '/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',
+            $path,
+            $match
+        )) {
             die("oldMirLogs not longer supported\n");
         } elseif (preg_match(
             '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
@@ -78,15 +78,15 @@ class MIRToolbox
             //fwrite(STDERR, "Match - MCRFileNodeServlet:".$path."\n");
             //fwrite(STDERR, "Derivat (".$match[1].")");
 
-            if (isset($match[3]) && !(strpos($match[3], "?view") === false)) {  // If intern Dokviewer
+            if (isset($match[3]) && ! (strpos($match[3], "?view") === false)) {  // If intern Dokviewer
                 //fwrite(STDERR, "nur Ansicht.\n");
 
                 return false;
             }
             if (strpos(
-                    $referer,
-                    "pdf.worker.js"
-                ) !== false || strpos($referer, "pdf.min.worker.js") !== false) {
+                $referer,
+                "pdf.worker.js"
+            ) !== false || strpos($referer, "pdf.min.worker.js") !== false) {
                 //fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
 
                 return false;

@@ -27,13 +27,13 @@ abstract class AbstractMycoreFactory
         $count = 0;
         // TODO Why is this developed in this way?
         @$load = $doc->load($url, LIBXML_NOWARNING);
-        while ($count < 10 && !$load) {
+        while ($count < 10 && ! $load) {
             //fwrite(STDERR, "Error: unable to get Data from ".$url.". Try to reconnect(".$count.")\n");
             usleep(2000);
             @$load = $doc->load($url, LIBXML_NOWARNING);
             $count++;
         }
-        if (!$load) {
+        if (! $load) {
             //throw new Exception("Error: unable to get Data from ".$this->config['url_prefix']);
 
             return null;
