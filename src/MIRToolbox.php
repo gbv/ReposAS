@@ -1,6 +1,8 @@
 <?php
 namespace ReposAS;
 
+use ReposAS\mycore;
+
 class MIRToolbox {
     var $dbh=false;
     var $config=false;
@@ -19,8 +21,8 @@ class MIRToolbox {
         $this->logger=$logger;
         $this->cache=array();
         $this->lastDerivate="";
-        $this->MyCoReDerivateFactory = new MyCoReDerivateFactory($config);
-        $this->MyCoReObjectFactory = new MyCoReObjectFactory($config);
+        $this->MyCoReDerivateFactory = new mycore\MyCoReDerivateFactory($config);
+        $this->MyCoReObjectFactory = new mycore\MyCoReObjectFactory($config);
     }
 
     function addIdentifier(& $reposasLogline) {

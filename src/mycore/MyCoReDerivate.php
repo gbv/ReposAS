@@ -1,5 +1,5 @@
 <?php
-namespace ReposAS;
+namespace ReposAS\mycore;
 
 class MyCoReDerivate {
 
