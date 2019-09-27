@@ -1,4 +1,5 @@
 <?php
+
 namespace ReposASTest;
 
 use ReposAS\Logline;

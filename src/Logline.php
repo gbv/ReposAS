@@ -2,7 +2,8 @@
 
 namespace ReposAS;
 
-class Logline {
+class Logline
+{
     public $IP;
     public $RemoteLogname;
     public $RemoteUser;
@@ -14,21 +15,25 @@ class Logline {
     public $SizeOfResponse;
     public $Referer;
     public $UserAgent;
-    function __construct() {
+
+    // TODO Why is this empty?
+    public function __construct()
+    {
     }
 
-    public function __toString() {
-        $str=$this->IP." ";
-        $str.=$this->RemoteLogname." ";
-        $str.=$this->RemoteUser." ";
-        $str.='['.$this->Time."] ";
-        $str.='"'.$this->HttpMethod." ";
-        $str.=$this->URL." ";
-        $str.=$this->HttpProtokol.'" ';
-        $str.=$this->HttpStatusCode.' ';
-        $str.=$this->SizeOfResponse." ";
-        $str.='"'.$this->Referer.'" ';
-        $str.='"'.$this->UserAgent.'"';
+    public function __toString()
+    {
+        $str = $this->IP . " ";
+        $str .= $this->RemoteLogname . " ";
+        $str .= $this->RemoteUser . " ";
+        $str .= '[' . $this->Time . "] ";
+        $str .= '"' . $this->HttpMethod . " ";
+        $str .= $this->URL . " ";
+        $str .= $this->HttpProtokol . '" ';
+        $str .= $this->HttpStatusCode . ' ';
+        $str .= $this->SizeOfResponse . " ";
+        $str .= '"' . $this->Referer . '" ';
+        $str .= '"' . $this->UserAgent . '"';
 
         return $str;
     }

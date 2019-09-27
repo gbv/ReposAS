@@ -1,16 +1,19 @@
 <?php
+
 namespace ReposAS;
 
-class ReposasFilterHttpStatus {
-
-
-    function __construct() {
+class ReposasFilterHttpStatus
+{
+    // TODO Why is this empty?
+    public function __construct()
+    {
     }
 
-    function edit(& $reposasLogline) {
+    public function edit(& $reposasLogline)
+    {
         $httpStatus = $reposasLogline->HttpStatusCode;
-        if (! ($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 202) ) {
-            $reposasLogline->Subjects[]="reposas:filter:httpStatus";
+        if (!($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 202)) {
+            $reposasLogline->Subjects[] = "reposas:filter:httpStatus";
         }
     }
 }

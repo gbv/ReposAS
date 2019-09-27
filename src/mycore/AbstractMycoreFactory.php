@@ -1,5 +1,6 @@
 <?php
-namespace ReposAS\abstracts;
+
+namespace ReposAS\mycore;
 
 abstract class AbstractMycoreFactory
 {
@@ -24,6 +25,7 @@ abstract class AbstractMycoreFactory
     {
         $doc = new \DOMDocument();
         $count = 0;
+        // TODO Why is this developed in this way?
         @$load = $doc->load($url, LIBXML_NOWARNING);
         while ($count < 10 && !$load) {
             //fwrite(STDERR, "Error: unable to get Data from ".$url.". Try to reconnect(".$count.")\n");
