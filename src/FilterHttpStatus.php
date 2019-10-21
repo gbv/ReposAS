@@ -2,18 +2,18 @@
 
 namespace ReposAS;
 
-class ReposasFilterHttpStatus
+class FilterHttpStatus
 {
     // TODO Why is this empty?
     public function __construct()
     {
     }
 
-    public function edit(& $reposasLogline)
+    public function edit(& $convertedLogline)
     {
-        $httpStatus = $reposasLogline->HttpStatusCode;
+        $httpStatus = $convertedLogline->httpStatusCode;
         if (! ($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 202)) {
-            $reposasLogline->Subjects[] = "reposas:filter:httpStatus";
+            $convertedLogline->subjects[] = "reposas:filter:httpStatus";
         }
     }
 }

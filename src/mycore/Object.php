@@ -2,7 +2,7 @@
 
 namespace ReposAS\mycore;
 
-class MyCoReObject
+class Object
 {
 
     public $objectid = null;

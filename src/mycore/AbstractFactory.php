@@ -2,7 +2,7 @@
 
 namespace ReposAS\mycore;
 
-abstract class AbstractMycoreFactory
+abstract class AbstractFactory
 {
     abstract protected function __construct($config);
 

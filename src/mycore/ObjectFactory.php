@@ -2,7 +2,7 @@
 
 namespace ReposAS\mycore;
 
-class MyCoReObjectFactory extends AbstractMycoreFactory
+class ObjectFactory extends AbstractFactory
 {
 
     private $config = null;
@@ -61,7 +61,7 @@ class MyCoReObjectFactory extends AbstractMycoreFactory
             return null;
         }
 
-        $this->cache[$objectid] = new MyCoReObject($objectid, $parentid, $doi, $urn);
+        $this->cache[$objectid] = new Object($objectid, $parentid, $doi, $urn);
         return $this->cache[$objectid];
     }
 }

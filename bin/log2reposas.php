@@ -16,19 +16,19 @@ $logger->pushHandler(new StreamHandler($config['logdir'].'/log2reposas.log', Log
 
 // Regular expression for the apache logline created by format
 // %{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\" 
-$ReExp ='/^';
-//$ReExp.='(-|\d+\.\d+\.\d+\.\d+|([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}) ';      // IP Adress 
-//$ReExp.='(unknown|-|\d+\.\d+\.\d+\.\d+(, unknown)?|([A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}) ';      // IP Adress
-$ReExp.='(.*) ';      // IP Adress
-$ReExp.='(.*) ';                            // Remote logname
-$ReExp.='.* ';                              // Remote user
-$ReExp.='\[(.*)\] ';                        // Time the request was received
-$ReExp.='"(.*) (.*) HTTP\/[1,2]\.[0,1]" ';  // http Method, request URL, 
-$ReExp.='(\d\d\d) ';                        // http Status Code
-$ReExp.='([0-9-]+) ';                       // Size of response in bytes
-$ReExp.='"(.*)" ';                          // Referer
-$ReExp.='"(.*)"';                           // User Agent
-$ReExp.='/';
+$regExp ='/^';
+//$regExp.='(-|\d+\.\d+\.\d+\.\d+|([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}) ';      // IP Adress
+//$regExp.='(unknown|-|\d+\.\d+\.\d+\.\d+(, unknown)?|([A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}) ';      // IP Adress
+$regExp.='(.*) ';      // IP Adress
+$regExp.='(.*) ';                            // Remote logname
+$regExp.='.* ';                              // Remote user
+$regExp.='\[(.*)\] ';                        // Time the request was received
+$regExp.='"(.*) (.*) HTTP\/[1,2]\.[0,1]" ';  // http Method, request URL,
+$regExp.='(\d\d\d) ';                        // http Status Code
+$regExp.='([0-9-]+) ';                       // Size of response in bytes
+$regExp.='"(.*)" ';                          // Referer
+$regExp.='"(.*)"';                           // User Agent
+$regExp.='/';
 
 
 while (! feof(STDIN)) {
@@ -41,10 +41,10 @@ while (! feof(STDIN)) {
       echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
 
-    if (! preg_match($ReExp, $line, $treffer)) {
+    if (! preg_match($regExp, $line, $treffer)) {
       $logmsg="Can't parse logline (wrong logformat?):\n";
       $logmsg.="    ".$line."\n";
-      $logmsg.="    ".$ReExp."";
+      $logmsg.="    ".$regExp."";
       $logger->error($logmsg);
       die ("Error: ".$logmsg."\n");
     }

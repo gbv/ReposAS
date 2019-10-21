@@ -9,8 +9,8 @@ class MIRToolbox
     public $dbh = false;
     public $config = false;
 
-    public $MyCoReObjectFactory = null;
-    public $MyCoReDerivateFactory = null;
+    public $mycoreObjectFactory = null;
+    public $mycoreDerivateFactory = null;
 
 
     /**
@@ -24,14 +24,14 @@ class MIRToolbox
         $this->logger = $logger;
         $this->cache = [];
         $this->lastDerivate = "";
-        $this->MyCoReDerivateFactory = new mycore\MyCoReDerivateFactory($config);
-        $this->MyCoReObjectFactory = new mycore\MyCoReObjectFactory($config);
+        $this->mycoreDerivateFactory = new mycore\DerivateFactory($config);
+        $this->mycoreObjectFactory = new mycore\ObjectFactory($config);
     }
 
-    public function addIdentifier(& $reposasLogline)
+    public function addIdentifier(& $convertedLogline)
     {
-        $path = $reposasLogline->URL;
-        $referer = $reposasLogline->Referer;
+        $path = $convertedLogline->url;
+        $referer = $convertedLogline->referer;
 
         if (preg_match(
             '/\/rsc\/stat\/([^\/]+_[^\/]+_[0-9]{8}).css$/',
@@ -40,11 +40,11 @@ class MIRToolbox
         )) {
             // The Fake css download
             //fwrite(STDERR, "Match - fake css:".$path."\n");
-            $object = $this->MyCoReObjectFactory->create($match[1]);
+            $object = $this->mycoreObjectFactory->create($match[1]);
 
             if ($object) {
-                $reposasLogline->Identifier = $object->getAllIdentifier();
-                $reposasLogline->Subjects[] = "oas:content:counter_abstract";
+                $convertedLogline->identifier = $object->getAllIdentifier();
+                $convertedLogline->subjects[] = "oas:content:counter_abstract";
 
                 return true;
             }
@@ -55,11 +55,11 @@ class MIRToolbox
         )) {
             // Metadatapage docportal and citelink
             //fwrite(STDERR, "Match - receive:".$path."\n");
-            $object = $this->MyCoReObjectFactory->create($match[1]);
+            $object = $this->mycoreObjectFactory->create($match[1]);
 
             if ($object) {
-                $reposasLogline->Identifier = $object->getAllIdentifier();
-                $reposasLogline->Subjects[] = "oas:content:counter_abstract";
+                $convertedLogline->identifier = $object->getAllIdentifier();
+                $convertedLogline->subjects[] = "oas:content:counter_abstract";
 
                 return true;
             }
@@ -98,7 +98,7 @@ class MIRToolbox
                 return false;
             }
             $this->lastDerivate = $derivateid;
-            $derivate = $this->MyCoReDerivateFactory->create($derivateid);
+            $derivate = $this->mycoreDerivateFactory->create($derivateid);
             if ($derivate == null) {
                 return false;
             }
@@ -107,19 +107,19 @@ class MIRToolbox
             //fwrite(STDERR, $maindoc." - ".$filename."\n");
 
             if ($maindoc == $filename) {
-                $reposasLogline->Subjects[] = "oas:content:counter";
-                $reposasLogline->Identifier[] = $derivateid;
+                $convertedLogline->subjects[] = "oas:content:counter";
+                $convertedLogline->identifier[] = $derivateid;
 
                 // Add objectid
                 $objectid = $derivate->objectid;
                 //fwrite(STDERR, " ObjectID: ".$objectid."\n");
-                $object = $this->MyCoReObjectFactory->create($objectid);
-                $reposasLogline->Identifier = array_merge($object->getAllIdentifier(), $reposasLogline->Identifier);
+                $object = $this->mycoreObjectFactory->create($objectid);
+                $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
 
                 //Add URN
                 $urn = $derivate->urn;
                 if ($urn) {
-                    $reposasLogline->Identifier[] = $urn;
+                    $convertedLogline->identifier[] = $urn;
                 }
 
                 return true;
@@ -135,17 +135,17 @@ class MIRToolbox
             //fwrite(STDERR, "Match - MCRZipServlet:".$path."\n");
             //fwrite(STDERR, "Derivate (".$match[1].")\n");
             $derivateid = $match[1];
-            $reposasLogline->Subjects[] = "oas:content:counter";
-            $derivate = $this->MyCoReDerivateFactory->create($derivateid);
-            $reposasLogline->Identifier[] = $derivateid;
+            $convertedLogline->subjects[] = "oas:content:counter";
+            $derivate = $this->mycoreDerivateFactory->create($derivateid);
+            $convertedLogline->identifier[] = $derivateid;
             $objectid = $derivate->objectid;
             //fwrite(STDERR, "Object:".$objectid."\n");
-            $object = $this->MyCoReObjectFactory->create($objectid);
-            $reposasLogline->Identifier = array_merge($object->getAllIdentifier(), $reposasLogline->Identifier);
+            $object = $this->mycoreObjectFactory->create($objectid);
+            $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
             //Add URN
             $urn = $derivate->urn;
             if ($urn) {
-                $reposasLogline->Identifier = $urn;
+                $convertedLogline->identifier = $urn;
             }
         } elseif (preg_match(
             '/\/rsc\/pdf\/([^\/]+_derivate_[0-9]+)[?]pages=1-\d+$/',
@@ -155,16 +155,16 @@ class MIRToolbox
             //fwrite(STDERR, "Match - PDF Download:".$path."\n");
             //fwrite(STDERR, "Derivate (".$match[1].")\n");
             $derivateid = $match[1];
-            $reposasLogline->Subjects[] = "oas:content:counter";
-            $derivate = $this->MyCoReDerivateFactory->create($derivateid);
-            $reposasLogline->Identifier[] = $derivateid;
+            $convertedLogline->subjects[] = "oas:content:counter";
+            $derivate = $this->mycoreDerivateFactory->create($derivateid);
+            $convertedLogline->identifier[] = $derivateid;
             $objectid = $derivate->objectid;
-            $object = $this->MyCoReObjectFactory->create($objectid);
-            $reposasLogline->Identifier = array_merge($object->getAllIdentifier(), $reposasLogline->Identifier);
+            $object = $this->mycoreObjectFactory->create($objectid);
+            $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
             //Add URN
             $urn = $derivate->urn;
             if ($urn) {
-                $reposasLogline->Identifier = $urn;
+                $convertedLogline->identifier = $urn;
             }
         } else {
             return false;

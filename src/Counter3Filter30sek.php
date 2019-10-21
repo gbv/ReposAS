@@ -12,11 +12,11 @@ class Counter3Filter30sek
     {
     }
 
-    public function edit(& $reposasLogline)
+    public function edit(& $convertedLogline)
     {
-        $ip = $reposasLogline->IP;
-        $path = $reposasLogline->URL;
-        $time = $reposasLogline->Time;
+        $ip = $convertedLogline->ip;
+        $path = $convertedLogline->url;
+        $time = $convertedLogline->time;
         $unixtime = strtotime($time);
 
         // delete old entrys
@@ -27,7 +27,7 @@ class Counter3Filter30sek
         // Find duplicate entry
         foreach ($this->lastHits as $lastHit) {
             if ($lastHit['ip'] == $ip && $lastHit['path'] == $path) {
-                $reposasLogline->Subjects[] = "filter:30sek:counter3";
+                $convertedLogline->subjects[] = "filter:30sek:counter3";
             }
         }
 

@@ -2,7 +2,7 @@
 
 namespace ReposAS\mycore;
 
-class MyCoReDerivateFactory extends AbstractMycoreFactory
+class DerivateFactory extends AbstractFactory
 {
 
     private $config = null;
@@ -48,7 +48,7 @@ class MyCoReDerivateFactory extends AbstractMycoreFactory
         $elements = $xpath->query("/mycorederivate/derivate/fileset");
         $element = $elements->item(0);
         $urn = ($element) ? $urn = $element->getAttribute("urn") : null;
-        $this->cache[$derivateid] = new MyCoReDerivate($derivateid, $objectid, $maindoc, $urn);
+        $this->cache[$derivateid] = new Derivate($derivateid, $objectid, $maindoc, $urn);
 
         return $this->cache[$derivateid];
     }

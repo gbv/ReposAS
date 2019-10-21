@@ -2,7 +2,7 @@
 
 namespace ReposAS\mycore;
 
-class MyCoReDerivate
+class Derivate
 {
 
     public $derivateid = null;

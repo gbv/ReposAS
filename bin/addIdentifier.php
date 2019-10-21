@@ -4,17 +4,17 @@
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/../config/config.php';
 
-$reposasLoglineParser=new ReposAS\ReposasLogfileParser();
-$mirToolBox=new ReposAS\MIRToolbox ($config);
+$convertedLoglineParser=new ReposAS\ConvertedLoglineParser();
+$mirToolbox=new ReposAS\MIRToolbox ($config);
 
 while (! feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {
-        $logLine=new ReposAS\ReposasLogline();
-        if ( $reposasLoglineParser->parse($line, $logLine)) {
-          $mirToolBox->addIdentifier($logLine);
-          echo ($logLine."\n");
+        $logline=new ReposAS\ConvertedLogline();
+        if ( $convertedLoglineParser->parse($line, $logline)) {
+          $mirToolbox->addIdentifier($logline);
+          echo ($logline."\n");
         } else {
-            //die("Error: malformed Logline".$line."\n");
+            //die("Error: malformed ApacheLogline".$line."\n");
             // TO DO Goog logging
         }
     }
