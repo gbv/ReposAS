@@ -10,6 +10,7 @@ class ConvertedLogline extends ApacheLogline
     public $subjects;
 
     // TODO Why is this empty?
+    // TODO: Maybe combine with parser?
     public function __construct()
     {
     }
@@ -21,7 +22,7 @@ class ConvertedLogline extends ApacheLogline
         $str .= " ";
         $str .= $this->sessionId . " ";
         $str .= json_encode($this->identifier) . " ";
-        $str .= json_encode($this->subjects) . " ";
+        $str .= json_encode($this->subjects) . "";
 
         return $str;
     }
