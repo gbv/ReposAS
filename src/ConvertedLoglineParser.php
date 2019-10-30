@@ -46,7 +46,6 @@ class ConvertedLoglineParser
         if (preg_match($regExp2, $line2, $treffer)) {
             $logline->uuid = trim($treffer[1]);
             $logline->ip = trim($treffer[2]);
-            $logline->anonymizeIp();
             $logline->remoteLogname = trim($treffer[3]);
             $logline->remoteUser = trim($treffer[4]);
             $logline->time = trim($treffer[5]);

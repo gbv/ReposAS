@@ -9,7 +9,7 @@ class ConvertedLoglineParserTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {
-        $testFile = fopen("ressources/log2reposas.log", "r");
+        $testFile = fopen(__DIR__."/ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
         $testline = trim(fgets($testFile));
         $convertedLoglineParser = new ConvertedLoglineParser();
         $logline = new ConvertedLogline();

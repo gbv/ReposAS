@@ -21,7 +21,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen("ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
+        $this->testFile = fopen(__DIR__."/ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**
