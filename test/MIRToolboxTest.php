@@ -7,7 +7,6 @@ use ReposAS\ConvertedLoglineParser;
 use ReposAS\MIRToolbox;
 use ReposAS\Configuration;
 
-
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase
 {
     private $mirToolbox;
@@ -50,7 +49,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
     {
         $logline = new ConvertedLogline();
 
-        while (!feof($this->testFile)) {
+        while (! feof($this->testFile)) {
             $lines[] = fgets($this->testFile);
         }
         $testline = $lines[4];

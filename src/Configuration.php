@@ -2,7 +2,6 @@
 
 namespace ReposAS;
 
-
 class Configuration
 {
     private $config;

@@ -44,13 +44,12 @@ class ApacheLogline
     public function anonymizeIp()
     {
 
-        if(filter_var($this->ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
-        {
+        if (filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             $ipTemp = explode('.', $this->ip);
             $ipTemp[2] = 'XXX';
             $ipTemp[3] = 'XXX';
             $this->ip = implode('.', $ipTemp);
-        } elseif(filter_var($this->ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6)) {
+        } elseif (filter_var($this->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             $ipTemp = explode(':', $this->ip);
             $ipTemp[6] = 'XXXX';
             $ipTemp[7] = 'XXXX';
