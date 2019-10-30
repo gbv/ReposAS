@@ -7,8 +7,8 @@ class Configuration
 {
     public static function getConfig()
     {
-        $configPath = __DIR__ . '/../config/config.json';
-        $config = json_decode(file_get_contents($configPath), true);
+        $configPath = __DIR__ . '/../config/config.ini';
+        $config = parse_ini_file($configPath);
         return $config;
     }
 }

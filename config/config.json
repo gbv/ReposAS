@@ -1,7 +1,0 @@
-{
-    "logdir" :  "../logs",
-    "accesslogdir" : "../accesslogs",
-    "oldMirLogs" : false,
-    "getmethod" : "file",
-    "datadir" : "../data"
-}
