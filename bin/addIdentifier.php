@@ -2,8 +2,8 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../config/config.php';
 
+$config = \ReposAS\Configuration::getConfig();
 $convertedLoglineParser=new ReposAS\ConvertedLoglineParser();
 $mirToolbox=new ReposAS\MIRToolbox($config);
 

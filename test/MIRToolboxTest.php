@@ -5,6 +5,7 @@ namespace ReposASTest;
 use ReposAS\ConvertedLogline;
 use ReposAS\ConvertedLoglineParser;
 use ReposAS\MIRToolbox;
+use ReposAS\Configuration;
 
 
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase
@@ -16,7 +17,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         parent::setUp();
-        require_once __DIR__ . '/../config/config.php';
+        $config = Configuration::getConfig();
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
