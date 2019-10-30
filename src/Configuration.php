@@ -5,10 +5,16 @@ namespace ReposAS;
 
 class Configuration
 {
-    public static function getConfig()
+    private $config;
+
+    public function __construct()
     {
         $configPath = __DIR__ . '/../config/config.ini';
-        $config = parse_ini_file($configPath);
-        return $config;
+        $this->config = parse_ini_file($configPath);
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
     }
 }

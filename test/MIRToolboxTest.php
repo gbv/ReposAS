@@ -17,7 +17,8 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = Configuration::getConfig();
+        $configuration = new Configuration();
+        $config = $configuration->getConfig();
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
