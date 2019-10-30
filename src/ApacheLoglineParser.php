@@ -29,6 +29,7 @@ class ApacheLoglineParser
         }
         if (preg_match($regExp2, $line, $treffer)) {
             $logline->ip = trim($treffer[1]);
+            $logline->anonymizeIp();
 
             return true;
         } else {
