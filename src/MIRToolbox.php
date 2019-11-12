@@ -33,6 +33,31 @@ class MIRToolbox
         $path = $convertedLogline->url;
         $referer = $convertedLogline->referer;
 
+        /**
+         * Add functionality for OPUS4.
+         *
+         * There are two cases:
+         * The first is a frontdoor access. This is tagged with content:counter_abstract and is represented by .../frontdoor/index/...
+         * The second is a download. This is tagged with content:counter and represented by .../frontdoor/deliver/... or .../files/...
+         * In the logfile there are also other layout-accesses. We decided to not tag this kind of access,
+         * because this is not an access of interest.
+         */
+        if (strpos($path, 'opus') !== false) {
+            if (preg_match("|/(opus4-[^/]+)/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|",
+                $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter";
+                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
+            } elseif (preg_match("|/(opus4-[^/]+)/files/([0-9]+)|",
+                $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter";
+                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
+            } elseif (preg_match("|/(opus4-[^/]+)/frontdoor/index/.*/docId/([0-9]+)|",
+                $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_abstract";
+                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
+            }
+        }
+
         if (preg_match(
             '/\/rsc\/stat\/([^\/]+_[^\/]+_[0-9]{8}).css$/',
             $path,
@@ -64,10 +89,10 @@ class MIRToolbox
                 return true;
             }
         } elseif ($this->config['oldMirLogs'] === true && preg_match(
-            '/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',
-            $path,
-            $match
-        )) {
+                '/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',
+                $path,
+                $match
+            )) {
             die("oldMirLogs not longer supported\n");
         } elseif (preg_match(
             '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
@@ -78,15 +103,15 @@ class MIRToolbox
             //fwrite(STDERR, "Match - MCRFileNodeServlet:".$path."\n");
             //fwrite(STDERR, "Derivat (".$match[1].")");
 
-            if (isset($match[3]) && ! (strpos($match[3], "?view") === false)) {  // If intern Dokviewer
+            if (isset($match[3]) && !(strpos($match[3], "?view") === false)) {  // If intern Dokviewer
                 //fwrite(STDERR, "nur Ansicht.\n");
 
                 return false;
             }
             if (strpos(
-                $referer,
-                "pdf.worker.js"
-            ) !== false || strpos($referer, "pdf.min.worker.js") !== false) {
+                    $referer,
+                    "pdf.worker.js"
+                ) !== false || strpos($referer, "pdf.min.worker.js") !== false) {
                 //fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
 
                 return false;

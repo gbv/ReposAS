@@ -20,7 +20,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen("ressources/log2reposas.log", "r");
+        $this->testFile = fopen("ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**
@@ -35,7 +35,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $this->convertedLoglineParser->parse($testline, $logline);
         $this->mirToolbox->addIdentifier($logline);
 
-        $expectedIdentifier = ["opus4-foo1-59"];
+        $expectedIdentifier = ["opus4-foo1-1618"];
         $expectedSubjects = ["oas:content:counter"];
         $this->assertEquals($logline->identifier, $expectedIdentifier);
         $this->assertEquals($logline->subjects, $expectedSubjects);
@@ -51,12 +51,11 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         while (!feof($this->testFile)) {
             $lines[] = fgets($this->testFile);
         }
-        $testline = $lines[2];
-
+        $testline = $lines[4];
         $this->convertedLoglineParser->parse($testline, $logline);
         $this->mirToolbox->addIdentifier($logline);
 
-        $expectedIdentifier = ["opus4-foo3-16412"];
+        $expectedIdentifier = ["opus4-foo3-2008"];
         $expectedSubjects = ["oas:content:counter_abstract"];
         $this->assertEquals($logline->identifier, $expectedIdentifier);
         $this->assertEquals($logline->subjects, $expectedSubjects);
