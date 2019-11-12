@@ -5,7 +5,7 @@ namespace ReposASTest;
 use ReposAS\ConvertedLogline;
 use ReposAS\ConvertedLoglineParser;
 use ReposAS\MIRToolbox;
-
+use ReposAS\Configuration;
 
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase
 {
@@ -16,11 +16,12 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         parent::setUp();
-        require_once __DIR__ . '/../config/config.php';
+        $configuration = new Configuration();
+        $config = $configuration->getConfig();
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen("ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
+        $this->testFile = fopen(__DIR__."/ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**
@@ -48,7 +49,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
     {
         $logline = new ConvertedLogline();
 
-        while (!feof($this->testFile)) {
+        while (! feof($this->testFile)) {
             $lines[] = fgets($this->testFile);
         }
         $testline = $lines[4];

@@ -2,8 +2,9 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../config/config.php';
 
+$configuration = new \ReposAS\Configuration();
+$config = $configuration->getConfig();
 $convertedLoglineParser=new ReposAS\ConvertedLoglineParser();
 $mirToolbox=new ReposAS\MIRToolbox($config);
 
@@ -12,6 +13,7 @@ while (! feof(STDIN)) {
         $logline=new ReposAS\ConvertedLogline();
         if ( $convertedLoglineParser->parse($line, $logline)) {
           $mirToolbox->addIdentifier($logline);
+          $logline->anonymizeIp();
           echo ($logline."\n");
         } else {
             //die("Error: malformed ApacheLogline".$line."\n");

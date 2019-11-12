@@ -2,7 +2,9 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../config/config.php';
+
+$configuration = new \ReposAS\Configuration();
+$config = $configuration->getConfig();
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

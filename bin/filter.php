@@ -1,7 +1,6 @@
 #!/usr/bin/php
 <?php
 
-require_once __DIR__.'/../config/config.php';
 require_once __DIR__.'/../vendor/autoload.php';
 
 $convertedLoglineParser= new ReposAS\ConvertedLoglineParser();
@@ -14,6 +13,7 @@ while (! feof(STDIN)) {
         if ( $convertedLoglineParser->parse($line, $logline)) {
             $filterRobots->edit($logline);
             $counter3Filter30sek->edit($logline);
+            $logline->anonymizeIp();
             echo ($logline."\n");
         } else {
             //die("Error: malformed ApacheLogline".$line."\n");
