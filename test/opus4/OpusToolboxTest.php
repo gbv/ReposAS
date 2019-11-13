@@ -1,27 +1,31 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: max
+ * Date: 13.11.19
+ * Time: 18:17
+ */
 
-namespace ReposASTest;
+namespace ReposASTest\opus4;
 
 use ReposAS\ConvertedLogline;
 use ReposAS\ConvertedLoglineParser;
-use ReposAS\MIRToolbox;
-use ReposAS\Configuration;
+use ReposAS\opus4\OpusToolbox;
 
-class MIRToolboxTest extends \PHPUnit\Framework\TestCase
+class OpusToolboxTest extends \PHPUnit\Framework\TestCase
 {
-    private $mirToolbox;
+    private $opusToolbox;
     private $convertedLoglineParser;
     private $testFile;
 
     public function setUp()
     {
         parent::setUp();
-        $configuration = new Configuration();
-        $config = $configuration->getConfig();
-        $this->mirToolbox = new MIRToolbox($config);
+
+        $this->opusToolbox = new OpusToolbox();
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen(__DIR__."/ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
+        $this->testFile = fopen(__DIR__."/../ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**
@@ -34,7 +38,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $testline = trim(fgets($this->testFile));
 
         $this->convertedLoglineParser->parse($testline, $logline);
-        $this->mirToolbox->addIdentifier($logline);
+        $this->opusToolbox->addIdentifier($logline);
 
         $expectedIdentifier = ["opus4-foo1-1618"];
         $expectedSubjects = ["oas:content:counter"];
@@ -54,7 +58,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         }
         $testline = $lines[4];
         $this->convertedLoglineParser->parse($testline, $logline);
-        $this->mirToolbox->addIdentifier($logline);
+        $this->opusToolbox->addIdentifier($logline);
 
         $expectedIdentifier = ["opus4-foo3-2008"];
         $expectedSubjects = ["oas:content:counter_abstract"];
