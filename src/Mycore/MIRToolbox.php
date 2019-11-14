@@ -1,8 +1,8 @@
 <?php
 
-namespace ReposAS\mycore;
+namespace ReposAS\Mycore;
 
-use ReposAS\mycore;
+use ReposAS\Mycore;
 
 class MIRToolbox
 {
@@ -24,8 +24,8 @@ class MIRToolbox
         $this->logger = $logger;
         $this->cache = [];
         $this->lastDerivate = "";
-        $this->mycoreDerivateFactory = new mycore\DerivateFactory($config);
-        $this->mycoreObjectFactory = new mycore\ObjectFactory($config);
+        $this->mycoreDerivateFactory = new Mycore\DerivateFactory($config);
+        $this->mycoreObjectFactory = new Mycore\ObjectFactory($config);
     }
 
     public function addIdentifier(& $convertedLogline)

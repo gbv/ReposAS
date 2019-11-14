@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS\mycore;
+namespace ReposAS\Mycore;
 
 class Object
 {

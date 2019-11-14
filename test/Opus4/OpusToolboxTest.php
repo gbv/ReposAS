@@ -6,11 +6,11 @@
  * Time: 18:17
  */
 
-namespace ReposASTest\opus4;
+namespace ReposASTest\Opus4;
 
 use ReposAS\ConvertedLogline;
 use ReposAS\ConvertedLoglineParser;
-use ReposAS\opus4\OpusToolbox;
+use ReposAS\Opus4\OpusToolbox;
 
 class OpusToolboxTest extends \PHPUnit\Framework\TestCase
 {

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $configuration = new \ReposAS\Configuration();
 $config = $configuration->getConfig();
 $convertedLoglineParser = new ReposAS\ConvertedLoglineParser();
-$mirToolbox = new ReposAS\mycore\MIRToolbox($config);
+$mirToolbox = new ReposAS\Mycore\MIRToolbox($config);
 
 while (!feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {
@@ -14,9 +14,6 @@ while (!feof(STDIN)) {
         if ($convertedLoglineParser->parse($line, $logline)) {
             $mirToolbox->addIdentifier($logline);
             echo($logline . "\n");
-        } else {
-            //die("Error: malformed ApacheLogline".$line."\n");
-            // TO DO Goog logging
         }
     }
 }

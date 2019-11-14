@@ -16,8 +16,6 @@ while (!feof(STDIN)) {
             $str .= ', "subjects":' . json_encode($logline->subjects);
             $str .= '}';
             echo $str . "\n";
-        } else {
-            //die("Error: malformed ApacheLogline - abort Processing.\n");
         }
     }
 }
