@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $convertedLoglineParser = new ReposAS\ConvertedLoglineParser();
-$opusToolbox = new ReposAS\opus4\OpusToolbox();
+$opusToolbox = new ReposAS\Opus4\OpusToolbox();
 
 while (!feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {

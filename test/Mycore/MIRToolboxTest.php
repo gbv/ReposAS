@@ -4,7 +4,7 @@ namespace ReposASTest;
 
 use ReposAS\ConvertedLogline;
 use ReposAS\ConvertedLoglineParser;
-use ReposAS\mycore\MIRToolbox;
+use ReposAS\Mycore\MIRToolbox;
 use ReposAS\Configuration;
 
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase

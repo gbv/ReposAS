@@ -14,9 +14,6 @@ while (!feof(STDIN)) {
             $filterRobots->edit($logline);
             $counter3Filter30sek->edit($logline);
             echo($logline . "\n");
-        } else {
-            //die("Error: malformed ApacheLogline".$line."\n");
-            // TO DO Goog logging
         }
     }
 }
