@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace ReposAS\mycore;
 
 use ReposAS\mycore;
 
@@ -32,40 +32,6 @@ class MIRToolbox
     {
         $path = $convertedLogline->url;
         $referer = $convertedLogline->referer;
-
-        /**
-         * Add functionality for OPUS4.
-         *
-         * There are two cases:
-         * The first is a frontdoor access. This is tagged with content:counter_abstract and is represented by .../frontdoor/index/...
-         * The second is a download. This is tagged with content:counter and represented by .../frontdoor/deliver/... or .../files/...
-         * In the logfile there are also other layout-accesses. We decided to not tag this kind of access,
-         * because this is not an access of interest.
-         */
-        if (strpos($path, 'opus') !== false) {
-            if (preg_match(
-                "|/(opus4-[^/]+)/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|",
-                $path,
-                $match
-            )) {
-                $convertedLogline->subjects[] = "oas:content:counter";
-                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
-            } elseif (preg_match(
-                "|/(opus4-[^/]+)/files/([0-9]+)|",
-                $path,
-                $match
-            )) {
-                $convertedLogline->subjects[] = "oas:content:counter";
-                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
-            } elseif (preg_match(
-                "|/(opus4-[^/]+)/frontdoor/index/.*/docId/([0-9]+)|",
-                $path,
-                $match
-            )) {
-                $convertedLogline->subjects[] = "oas:content:counter_abstract";
-                $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
-            }
-        }
 
         if (preg_match(
             '/\/rsc\/stat\/([^\/]+_[^\/]+_[0-9]{8}).css$/',
@@ -102,6 +68,7 @@ class MIRToolbox
             $path,
             $match
         )) {
+            // TODO: Die ist eine nicht so gute Idee
             die("oldMirLogs not longer supported\n");
         } elseif (preg_match(
             '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
