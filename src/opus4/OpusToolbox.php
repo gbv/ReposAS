@@ -27,6 +27,7 @@ class OpusToolbox
         foreach ($method_names as $value) {
             $this->$value($path, $convertedLogline);
             $convertedLogline->identifier = array_unique($convertedLogline->identifier);
+            $convertedLogline->subjects = array_unique($convertedLogline->subjects);
         }
     }
 

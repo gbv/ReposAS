@@ -1119,5 +1119,9 @@
   {
     "pattern": "zyborg",
     "last_changed": "2017-08-08"
+  },
+  {
+    "pattern": "Semantic Health Web Crawler",
+    "last_changed": "2019-14-11"
   }
 ]
