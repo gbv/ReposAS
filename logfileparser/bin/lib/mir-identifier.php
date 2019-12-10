@@ -261,6 +261,7 @@ class MIRToolbox {
           $derivateid=$match[1];
           $reposasLogline->Subjects[]="oas:content:counter";
           $derivate=$this->MyCoReDerivateFactory->create($derivateid);
+          if ($derivate == null)  return false;
           $reposasLogline->Identifier[] = $derivateid;
           $objectid = $derivate->objectid;
           //fwrite(STDERR, "Object:".$objectid."\n");
@@ -275,6 +276,7 @@ class MIRToolbox {
           $derivateid=$match[1];
           $reposasLogline->Subjects[]="oas:content:counter";
           $derivate=$this->MyCoReDerivateFactory->create($derivateid);
+          if ($derivate == null)  return false;
 	  $reposasLogline->Identifier[] = $derivateid;
           $objectid = $derivate->objectid;
           $object=$this->MyCoReObjectFactory->create($objectid);
