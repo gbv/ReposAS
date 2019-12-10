@@ -4,14 +4,14 @@
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/../config.php';
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+//use Monolog\Logger;
+//use Monolog\Handler\StreamHandler;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
-$logger = new Logger('log2reposas');
-$logger->pushHandler(new StreamHandler($config['logdir'].'/log2reposas.log', Logger::DEBUG));
+//$logger = new Logger('log2reposas');
+//$logger->pushHandler(new StreamHandler($config['logdir'].'/log2reposas.log', Logger::DEBUG));
 
 
 // Regular expression for the apache logline created by format
@@ -45,7 +45,7 @@ while (! feof(STDIN)) {
       $logmsg="Can't parse logline (wrong logformat?):\n";
       $logmsg.="    ".$line."\n";
       $logmsg.="    ".$ReExp."";
-      $logger->error($logmsg);
+      //$logger->error($logmsg);
       die ("Error: ".$logmsg."\n");
     }
     // Qutput reposas format
