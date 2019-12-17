@@ -17,12 +17,19 @@ class OpusToolbox
          * In the logfile there are also other layout-accesses. We decided to not tag this kind of access,
          * because this is not an access of interest.
          */
-        $method_names = preg_grep('/^rule/', get_class_methods($this));
-        foreach ($method_names as $value) {
-            $this->$value($path, $convertedLogline, $praefix);
-            $convertedLogline->identifier = array_unique($convertedLogline->identifier);
-            $convertedLogline->subjects = array_unique($convertedLogline->subjects);
+
+            $method_names = preg_grep('/^rule/', get_class_methods($this));
+            foreach ($method_names as $value) {
+                $this->$value($path, $convertedLogline, $praefix);
+                $convertedLogline->identifier = array_unique($convertedLogline->identifier);
+                if ($convertedLogline->httpMethod == 'GET')
+                {
+                    $convertedLogline->subjects = array_unique($convertedLogline->subjects);
+                } elseif ($convertedLogline->httpMethod == 'HEAD') {
+                    $convertedLogline->subjects = ["oas:content:counter_head"];
+                }
         }
+
     }
 
     public function ruleDownload($path, & $convertedLogline, $praefix=Null)
