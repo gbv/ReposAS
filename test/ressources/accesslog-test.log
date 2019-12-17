@@ -25,4 +25,5 @@
 192.168.20.110 - - [06/Sep/2019:14:43:28 +0200] "GET /opus4-foo6/frontdoor/index/index/docId/38802 HTTP/1.1" 200 29129 "-" "Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)"
 192.168.20.110 - - [06/Sep/2019:14:43:28 +0200] "GET /opus4-foo6/frontdoor/index/index/docId/39019 HTTP/1.1" 200 24282 "-" "Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)"
 141.7.12.12 - - [13/Sep/2019:06:29:24 +0200] "GET /opus4-fau/frontdoor/index/index/searchtype/collection/id/16247/rows/20/start/1445/institutefq/Medizinische+Fakult%C3%A4t+-ohne+weitere+Spezifikation-/facetNumber_author_facet/all/facetNumber_year/all/docId/1089 HTTP/1.1" 200 7697 "-" "Semantic Health Web Crawler (shc-info.gecko.hs-heilbronn.de)"
-
+189.219.122.145 - - [14/Sep/2019:05:55:36 +0200] "-" 408 - "-" "-" -
+193.175.XXX.XXX - - [13/Sep/2019:07:11:17 +0200] "HEAD /opus4-fau/frontdoor/index/index/docId/8967 HTTP/1.1" 200 - "-" "Java/1.8.0_202" -
