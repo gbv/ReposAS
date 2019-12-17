@@ -56,4 +56,20 @@ class OpusToolbox
             }
         }
     }
+
+    public function ruleCssAccess($path, & $convertedLogline, $praefix=Null)
+    {
+        if ($praefix == Null)
+        {
+            if (preg_match("|/([^/]+)/.+.css$|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_css";
+                $convertedLogline->identifier[] = $match[1];
+            }
+        } else {
+            if (preg_match("|.css$|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_css";
+                $convertedLogline->identifier[] = $praefix;
+            }
+        }
+    }
 }

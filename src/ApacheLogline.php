@@ -83,6 +83,7 @@ class ApacheLogline
     public function checkFormat($line)
     {
         if (!preg_match($this->format, $line, $treffer)){
+
             $logmsg = "Can't parse logline (wrong logformat?):\n";
             $logmsg .= "    " . $line . "\n";
             $logmsg .= "    " . $this->format . "";
