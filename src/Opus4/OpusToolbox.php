@@ -29,14 +29,14 @@ class OpusToolbox
     {
         if ($praefix == Null)
         {
-            if (preg_match("|/[^/]+)/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|", $path, $match)) {
+            if (preg_match("|/([^/]+)/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter";
                 $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
             }
         } else {
             if (preg_match("|/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|", $path, $match)) {
             $convertedLogline->subjects[] = "oas:content:counter";
-            $convertedLogline->identifier[] = $praefix . "-" . $match[2];
+            $convertedLogline->identifier[] = $praefix . "-" . $match[1];
             }
         }
     }
@@ -45,14 +45,14 @@ class OpusToolbox
     {
         if ($praefix == Null)
         {
-            if (preg_match("|/[^/]+)/frontdoor/index/.*/docId/([0-9]+)|", $path, $match)) {
+            if (preg_match("|/([^/]+)/frontdoor/index/.*/docId/([0-9]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
                 $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
             }
         } else {
             if (preg_match("|/frontdoor/index/.*/docId/([0-9]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
-                $convertedLogline->identifier[] = $praefix . "-" . $match[2];
+                $convertedLogline->identifier[] = $praefix . "-" . $match[1];
             }
         }
     }
