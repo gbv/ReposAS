@@ -64,17 +64,49 @@ class OpusToolbox
         }
     }
 
-    public function ruleCssAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleAssetsAccess($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
         {
-            if (preg_match("|/([^/]+)/.+.css$|", $path, $match)) {
-                $convertedLogline->subjects[] = "oas:content:counter_css";
+            if (preg_match("|/([^/]+)/assets/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $match[1];
             }
         } else {
-            if (preg_match("|.css$|", $path, $match)) {
-                $convertedLogline->subjects[] = "oas:content:counter_css";
+            if (preg_match("|/assets/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $praefix;
+            }
+        }
+    }
+
+    public function ruleImageAccess($path, & $convertedLogline, $praefix=Null)
+    {
+        if ($praefix == Null)
+        {
+            if (preg_match("|/([^/]+)/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $match[1];
+            }
+        } else {
+            if (preg_match("|/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $praefix;
+            }
+        }
+    }
+
+    public function ruleLayoutAccess($path, & $convertedLogline, $praefix=Null)
+    {
+        if ($praefix == Null)
+        {
+            if (preg_match("|/([^/]+)/img/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $match[1];
+            }
+        } else {
+            if (preg_match("|/img/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $praefix;
             }
         }

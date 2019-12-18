@@ -62,7 +62,7 @@ class ConvertedLoglineParser
 
             return true;
         } else {
-            if (strpos($line ,'"-" 408 - "-" "-" - - [] []') !== false) {return false;}
+            if (preg_split('/ /', $line)[7] == '408') {return false;}
             fwrite(STDERR, "Error: can't parse ApacheLogline:\n");
             fwrite(STDERR, "    " . $line2 . "\n");
             fwrite(STDERR, "    " . $regExp2 . "\n");
