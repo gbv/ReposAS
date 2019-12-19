@@ -2,6 +2,9 @@
 
 namespace ReposAS\Opus4;
 
+/**
+* Ruleset for the enrichment of logfiles of OPUS4.
+*/
 class OpusToolbox
 {
     public function addIdentifier(& $convertedLogline, $praefix=Null)
@@ -31,7 +34,10 @@ class OpusToolbox
         }
 
     }
-
+    
+    /**
+    * Tag a file-download with oas:content:counter. File-download is a URL with "/frontdoor/deliver/..."
+    */
     public function ruleDownload($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
@@ -47,7 +53,10 @@ class OpusToolbox
             }
         }
     }
-
+    
+    /**
+    * Tag a frontdoor-access with oas:content:counter_abstract. Frontdoor-access is a URL with "/frontdoor/index/..."
+    */
     public function ruleFrontdoorAccess($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
@@ -63,7 +72,10 @@ class OpusToolbox
             }
         }
     }
-
+    
+    /**
+    * Tag an asset-access with oas:content:counter_layout. This should tag all URLs with ".../assets/..."
+    */
     public function ruleAssetsAccess($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
@@ -79,24 +91,11 @@ class OpusToolbox
             }
         }
     }
-
-    public function ruleImageAccess($path, & $convertedLogline, $praefix=Null)
-    {
-        if ($praefix == Null)
-        {
-            if (preg_match("|/([^/]+)/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
-                $convertedLogline->subjects[] = "oas:content:counter_layout";
-                $convertedLogline->identifier[] = $match[1];
-            }
-        } else {
-            if (preg_match("|/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
-                $convertedLogline->subjects[] = "oas:content:counter_layout";
-                $convertedLogline->identifier[] = $praefix;
-            }
-        }
-    }
-
-    public function ruleLayoutAccess($path, & $convertedLogline, $praefix=Null)
+    
+    /**
+    * Tag an iamge-access with oas:content:counter_layout. This should tag all URLs with ".../img/..."
+    */
+    public function ruleIamgetAccess($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
         {
@@ -106,6 +105,25 @@ class OpusToolbox
             }
         } else {
             if (preg_match("|/img/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $praefix;
+            }
+        }
+    }
+    
+    /**
+    * Tag any other layout-access with oas:content:counter_layout. This should tag all URLs with ".../layouts/..."
+    */
+    public function ruleLayoutAccess($path, & $convertedLogline, $praefix=Null)
+    {
+        if ($praefix == Null)
+        {
+            if (preg_match("|/([^/]+)/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
+                $convertedLogline->subjects[] = "oas:content:counter_layout";
+                $convertedLogline->identifier[] = $match[1];
+            }
+        } else {
+            if (preg_match("|/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $praefix;
             }
