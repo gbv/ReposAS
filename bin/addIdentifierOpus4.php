@@ -5,20 +5,20 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $convertedLoglineParser = new ReposAS\ConvertedLoglineParser();
 $opusToolbox = new ReposAS\Opus4\OpusToolbox();
-$opts = getopt('o:');
+$opts = getopt('', ["prefix::"]);
 
-if(array_key_exists('o', $opts))
+if(array_key_exists('prefix', $opts))
 {
-    $praefix = $opts['o'];
+    $prefix = $opts['prefix'];
 } else {
-    $praefix = NULL;
+    $prefix = NULL;
 }
 
 while (!feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {
         $logline = new ReposAS\ConvertedLogline();
         if ($convertedLoglineParser->parse($line, $logline)) {
-            $opusToolbox->addIdentifier($logline, $praefix);
+            $opusToolbox->addIdentifier($logline, $prefix);
             echo($logline . "\n");
         }
     }
