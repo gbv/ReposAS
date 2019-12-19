@@ -95,7 +95,7 @@ class OpusToolbox
     /**
     * Tag an iamge-access with oas:content:counter_layout. This should tag all URLs with ".../img/..."
     */
-    public function ruleIamgetAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleImagetAccess($path, & $convertedLogline, $praefix=Null)
     {
         if ($praefix == Null)
         {
