@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS\Mycore;
+namespace epusta\Mycore;
 
 class Object
 {

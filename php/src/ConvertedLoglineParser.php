@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace epusta;
 
 class ConvertedLoglineParser
 {
@@ -62,7 +62,9 @@ class ConvertedLoglineParser
 
             return true;
         } else {
-            if (preg_split('/ /', $line)[7] == '408') {return false;}
+            if (preg_split('/ /', $line)[7] == '408') {
+                return false;
+            }
             fwrite(STDERR, "Error: can't parse ApacheLogline:\n");
             fwrite(STDERR, "    " . $line2 . "\n");
             fwrite(STDERR, "    " . $regExp2 . "\n");

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="ReposAS coding standard">
     <rule ref="./vendor/zendframework/zend-coding-standard/ruleset.xml"/>
-    <file>src</file>
-    <file>test</file>
+    <file>php/src</file>
+    <file>php/test</file>
 </ruleset>

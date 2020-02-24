@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace epusta;
 
 class ApacheLogline
 {
@@ -82,8 +82,7 @@ class ApacheLogline
 
     public function checkFormat($line)
     {
-        if (!preg_match($this->format, $line, $treffer)){
-
+        if (! preg_match($this->format, $line, $treffer)) {
             $logmsg = "Can't parse logline (wrong logformat?):\n";
             $logmsg .= "    " . $line . "\n";
             $logmsg .= "    " . $this->format . "";
@@ -91,6 +90,6 @@ class ApacheLogline
             return $logmsg;
         }
 
-        return True;
+        return true;
     }
 }

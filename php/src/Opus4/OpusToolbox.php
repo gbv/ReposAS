@@ -34,7 +34,7 @@ class OpusToolbox
         }
 
     }
-    
+
     /**
     * Tag a file-download with oas:content:counter. File-download is a URL with "/frontdoor/deliver/..."
     */
@@ -53,7 +53,7 @@ class OpusToolbox
             }
         }
     }
-    
+
     /**
     * Tag a frontdoor-access with oas:content:counter_abstract. Frontdoor-access is a URL with "/frontdoor/index/..."
     */
@@ -72,7 +72,7 @@ class OpusToolbox
             }
         }
     }
-    
+
     /**
     * Tag an asset-access with oas:content:counter_layout. This should tag all URLs with ".../assets/..."
     */
@@ -91,7 +91,7 @@ class OpusToolbox
             }
         }
     }
-    
+
     /**
     * Tag an iamge-access with oas:content:counter_layout. This should tag all URLs with ".../img/..."
     */
@@ -110,7 +110,7 @@ class OpusToolbox
             }
         }
     }
-    
+
     /**
     * Tag any other layout-access with oas:content:counter_layout. This should tag all URLs with ".../layouts/..."
     */

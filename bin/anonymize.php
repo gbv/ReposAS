@@ -3,11 +3,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$convertedLoglineParser = new ReposAS\ConvertedLoglineParser();
+$convertedLoglineParser = new epusta\ConvertedLoglineParser();
 
 while (!feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {
-        $logline = new ReposAS\ConvertedLogline();
+        $logline = new epusta\ConvertedLogline();
         if ($convertedLoglineParser->parse($line, $logline)) {
             $logline->anonymizeIp();
             echo($logline . "\n");

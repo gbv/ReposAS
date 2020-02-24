@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace epusta;
 
 class FilterHttpStatus
 {
@@ -14,7 +14,7 @@ class FilterHttpStatus
         $httpStatus = $convertedLogline->httpStatusCode;
         //TODO: Why 2 times the same http status?
         if (! ($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 202)) {
-            $convertedLogline->subjects[] = "reposas:filter:httpStatus";
+            $convertedLogline->subjects[] = "epusta:filter:httpStatus";
         }
     }
 }

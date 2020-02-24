@@ -6,7 +6,7 @@
 
     <testsuites>
         <testsuite name="ReposAS logfileparser Test Suite">
-            <directory>./test/</directory>
+            <directory>./php/test/</directory>
         </testsuite>
     </testsuites>
 

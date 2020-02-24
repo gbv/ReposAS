@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace epusta;
 
 class Configuration
 {
@@ -8,7 +8,7 @@ class Configuration
 
     public function __construct()
     {
-        $configPath = __DIR__ . '/../config/config.ini';
+        $configPath = __DIR__ . '/../../config/config.ini';
         $this->config = parse_ini_file($configPath);
     }
 
