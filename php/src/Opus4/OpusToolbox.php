@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS\Opus4;
+namespace epusta\Opus4;
 
 class OpusToolbox
 {

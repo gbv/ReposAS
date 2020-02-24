@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS;
+namespace epusta;
 
 class ConvertedLogline extends ApacheLogline
 {

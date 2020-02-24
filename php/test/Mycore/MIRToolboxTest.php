@@ -1,11 +1,11 @@
 <?php
 
-namespace ReposASTest;
+namespace epustaTest;
 
-use ReposAS\ConvertedLogline;
-use ReposAS\ConvertedLoglineParser;
-use ReposAS\Mycore\MIRToolbox;
-use ReposAS\Configuration;
+use epusta\ConvertedLogline;
+use epusta\ConvertedLoglineParser;
+use epusta\Mycore\MIRToolbox;
+use epusta\Configuration;
 
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,7 +21,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen(__DIR__ . "/../ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
+        $this->testFile = fopen(__DIR__ . "/../ressources/epustaLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**

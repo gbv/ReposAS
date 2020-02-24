@@ -1,8 +1,8 @@
 <?php
 
-namespace ReposASTest;
+namespace epustaTest;
 
-use ReposAS\ApacheLogline;
+use epusta\ApacheLogline;
 
 class ApacheLoglineTest extends \PHPUnit\Framework\TestCase
 {

@@ -3,17 +3,17 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$configuration = new \ReposAS\Configuration();
+$configuration = new \epusta\Configuration();
 $config = $configuration->getConfig();
 
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
+//use Monolog\Handler\StreamHandler;
+//use Monolog\Logger;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
-use ReposAS\ConvertedLogline;
+use epusta\ConvertedLogline;
 
-$logger = new Logger('log2reposas');
-$logger->pushHandler(new StreamHandler($config['logdir'] . '/log2reposas.log', Logger::DEBUG));
+//$logger = new Logger('log2epusta');
+//$logger->pushHandler(new StreamHandler($config['logdir'] . '/log2epusta.log', Logger::DEBUG));
 
 
 while (!feof(STDIN)) {
@@ -29,7 +29,7 @@ while (!feof(STDIN)) {
 
         $message = $logline->checkFormat($line);
         if ($message != True) {
-            $logger->error($message);
+            //$logger->error($message);
             die ("Error: " . $message . "\n");
         }
 

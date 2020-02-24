@@ -1,8 +1,8 @@
 <?php
 
-namespace ReposAS\Mycore;
+namespace epusta\Mycore;
 
-use ReposAS\Mycore;
+use epusta\Mycore;
 
 class MIRToolbox
 {
@@ -138,6 +138,9 @@ class MIRToolbox
             $derivateid = $match[1];
             $convertedLogline->subjects[] = "oas:content:counter";
             $derivate = $this->mycoreDerivateFactory->create($derivateid);
+            if ($derivate == null) {
+                return false;
+            }
             $convertedLogline->identifier[] = $derivateid;
             $objectid = $derivate->objectid;
             //fwrite(STDERR, "Object:".$objectid."\n");
@@ -158,6 +161,9 @@ class MIRToolbox
             $derivateid = $match[1];
             $convertedLogline->subjects[] = "oas:content:counter";
             $derivate = $this->mycoreDerivateFactory->create($derivateid);
+            if ($derivate == null) {
+                return false;
+            }
             $convertedLogline->identifier[] = $derivateid;
             $objectid = $derivate->objectid;
             $object = $this->mycoreObjectFactory->create($objectid);

@@ -6,11 +6,11 @@
  * Time: 18:17
  */
 
-namespace ReposASTest\Opus4;
+namespace epustaTest\Opus4;
 
-use ReposAS\ConvertedLogline;
-use ReposAS\ConvertedLoglineParser;
-use ReposAS\Opus4\OpusToolbox;
+use epusta\ConvertedLogline;
+use epusta\ConvertedLoglineParser;
+use epusta\Opus4\OpusToolbox;
 
 class OpusToolboxTest extends \PHPUnit\Framework\TestCase
 {
@@ -25,7 +25,7 @@ class OpusToolboxTest extends \PHPUnit\Framework\TestCase
         $this->opusToolbox = new OpusToolbox();
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen(__DIR__."/../ressources/reposasLoglineWithoutIdentifiersAndSubjects.log", "r");
+        $this->testFile = fopen(__DIR__."/../ressources/epustaLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**

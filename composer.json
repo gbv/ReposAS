@@ -19,13 +19,13 @@
 
   "autoload": {
     "psr-4": {
-      "ReposAS\\": "php/src/"
+      "epusta\\": "php/src/"
     }
   },
 
   "autoload-dev": {
     "psr-4": {
-      "ReposASTest\\": "php/test/"
+      "epustaTest\\": "php/test/"
     }
   },
 
