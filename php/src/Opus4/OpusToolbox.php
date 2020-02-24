@@ -1,6 +1,6 @@
 <?php
 
-namespace ReposAS\Opus4;
+namespace epusta\Opus4;
 
 /**
 * Ruleset for the enrichment of logfiles of OPUS4.

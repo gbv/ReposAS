@@ -1,6 +1,6 @@
 {
-  "name": "ReposAS/logfileparser",
-  "description": "Logfileparser to provide Usage Statistics for repsitories with RepoAS",
+  "name": "ePuSta/logfileparser",
+  "description": "Logfileparser to provide Usage Statistics for repsitories with ePuSta",
   "license": "GPL-3.0+",
 
   "require": {

@@ -15,8 +15,8 @@ while (!feof(STDIN)) {
         if ($convertedLoglineParser->parse($line, $logline)) {
             $filterRobots->edit($logline);
             $counter3Filter30sek->edit($logline);
-            $filterHttpStatus->edit($logLine);
-            $filterHttpMethod->edit($logLine);
+            $filterHttpStatus->edit($logline);
+            $filterHttpMethod->edit($logline);
             echo($logline . "\n");
         } else {
             // die("Error: malformed Logline" . $line . "\n")

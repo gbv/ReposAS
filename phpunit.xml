@@ -5,7 +5,7 @@
          colors="true">
 
     <testsuites>
-        <testsuite name="ReposAS logfileparser Test Suite">
+        <testsuite name="ePuSta logfileparser Test Suite">
             <directory>./php/test/</directory>
         </testsuite>
     </testsuites>
