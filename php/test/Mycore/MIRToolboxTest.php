@@ -31,6 +31,6 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
      */
     public function testDummy()
     {
-        $this->assertEquals(1,1);
+        $this->assertEquals(1, 1);
     }
 }

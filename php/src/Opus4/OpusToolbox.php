@@ -4,7 +4,7 @@ namespace epusta\Opus4;
 
 class OpusToolbox
 {
-    public function addIdentifier(& $convertedLogline, $praefix=Null)
+    public function addIdentifier(& $convertedLogline, $praefix = null)
     {
         $path = $convertedLogline->url;
 
@@ -19,39 +19,35 @@ class OpusToolbox
          */
 
             $method_names = preg_grep('/^rule/', get_class_methods($this));
-            foreach ($method_names as $value) {
-                $this->$value($path, $convertedLogline, $praefix);
-                $convertedLogline->identifier = array_unique($convertedLogline->identifier);
-                if ($convertedLogline->httpMethod == 'GET')
-                {
-                    $convertedLogline->subjects = array_unique($convertedLogline->subjects);
-                } elseif ($convertedLogline->httpMethod == 'HEAD') {
-                    $convertedLogline->subjects = ["oas:content:counter_head"];
-                }
+        foreach ($method_names as $value) {
+            $this->$value($path, $convertedLogline, $praefix);
+            $convertedLogline->identifier = array_unique($convertedLogline->identifier);
+            if ($convertedLogline->httpMethod == 'GET') {
+                $convertedLogline->subjects = array_unique($convertedLogline->subjects);
+            } elseif ($convertedLogline->httpMethod == 'HEAD') {
+                $convertedLogline->subjects = ["oas:content:counter_head"];
+            }
         }
-
     }
 
-    public function ruleDownload($path, & $convertedLogline, $praefix=Null)
+    public function ruleDownload($path, & $convertedLogline, $praefix = null)
     {
-        if ($praefix == Null)
-        {
+        if ($praefix == null) {
             if (preg_match("|/([^/]+)/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter";
                 $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
             }
         } else {
             if (preg_match("|/frontdoor/deliver/index/docId/([0-9]+)/file/([A-Za-z0-9.]+)|", $path, $match)) {
-            $convertedLogline->subjects[] = "oas:content:counter";
-            $convertedLogline->identifier[] = $praefix . "-" . $match[1];
+                $convertedLogline->subjects[] = "oas:content:counter";
+                $convertedLogline->identifier[] = $praefix . "-" . $match[1];
             }
         }
     }
 
-    public function ruleFrontdoorAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleFrontdoorAccess($path, & $convertedLogline, $praefix = null)
     {
-        if ($praefix == Null)
-        {
+        if ($praefix == null) {
             if (preg_match("|/([^/]+)/frontdoor/index/.*/docId/([0-9]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
                 $convertedLogline->identifier[] = $match[1] . "-" . $match[2];
@@ -64,10 +60,9 @@ class OpusToolbox
         }
     }
 
-    public function ruleAssetsAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleAssetsAccess($path, & $convertedLogline, $praefix = null)
     {
-        if ($praefix == Null)
-        {
+        if ($praefix == null) {
             if (preg_match("|/([^/]+)/assets/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $match[1];
@@ -80,10 +75,9 @@ class OpusToolbox
         }
     }
 
-    public function ruleImageAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleImageAccess($path, & $convertedLogline, $praefix = null)
     {
-        if ($praefix == Null)
-        {
+        if ($praefix == null) {
             if (preg_match("|/([^/]+)/layouts/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $match[1];
@@ -96,10 +90,9 @@ class OpusToolbox
         }
     }
 
-    public function ruleLayoutAccess($path, & $convertedLogline, $praefix=Null)
+    public function ruleLayoutAccess($path, & $convertedLogline, $praefix = null)
     {
-        if ($praefix == Null)
-        {
+        if ($praefix == null) {
             if (preg_match("|/([^/]+)/img/([A-Za-z0-9.]+)|", $path, $match)) {
                 $convertedLogline->subjects[] = "oas:content:counter_layout";
                 $convertedLogline->identifier[] = $match[1];

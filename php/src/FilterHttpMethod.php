@@ -2,16 +2,19 @@
 
 namespace epusta;
 
-class FilterHttpMethod {
+class FilterHttpMethod
+{
 
 
-    function __construct() {
+    public function __construct()
+    {
     }
 
-    function edit(& $convertedLogline) {
+    public function edit(& $convertedLogline)
+    {
         $httpMethod = $convertedLogline->HttpMethod;
-        if ($httpMethod !=  'GET' ) {
-            $convertedLogline->Subjects[]="epusta:filter:httpMethod";
+        if ($httpMethod != 'GET') {
+            $convertedLogline->Subjects[] = "epusta:filter:httpMethod";
         }
     }
 }

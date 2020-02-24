@@ -36,6 +36,4 @@ class ConvertedLogline extends ApacheLogline
 
         return $out;
     }
-
-
 }

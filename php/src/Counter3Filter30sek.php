@@ -37,8 +37,10 @@ class Counter3Filter30sek
             }
         }
 
-        if (!isset($this->lastHits[$unixtime])) $this->lastHits[$unixtime] = array();
-        $thisHit = array();
+        if (! isset($this->lastHits[$unixtime])) {
+            $this->lastHits[$unixtime] = [];
+        }
+        $thisHit = [];
         $thisHit['ip'] = $ip;
         $thisHit['path'] = $path;
         $thisHit['identifier'] = $identifier;
