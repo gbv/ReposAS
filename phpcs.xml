@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="ReposAS coding standard">
+<ruleset name="ePuSta coding standard">
     <rule ref="./vendor/zendframework/zend-coding-standard/ruleset.xml"/>
     <file>php/src</file>
     <file>php/test</file>

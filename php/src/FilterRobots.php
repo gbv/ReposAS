@@ -6,7 +6,7 @@ class FilterRobots
 {
 
     public $robots = null;
-    public $robotsFileName = __DIR__ . '/../config/COUNTER_Robots_list.json';
+    public $robotsFileName = __DIR__ . '/../../config/COUNTER_Robots_list.json';
 
     public function __construct()
     {
