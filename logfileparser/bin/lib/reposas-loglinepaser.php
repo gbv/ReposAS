@@ -9,7 +9,7 @@ class ApacheLoglinePaser {
     $RegExp.='(.*) ';                            // Remote logname
     $RegExp.='.* ';                              // Remote user
     $RegExp.='\[(.*)\] ';                        // Time the request was received
-    $RegExp.='"(.*) (.*) (HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL,
+    $RegExp.='"(.*) (.*)\s+(HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL,
     $RegExp.='(\d\d\d) ';                        // http Status Code
     $RegExp.='[0-9-]+ ';                         // Size of response in bytes
     $RegExp.='"(.*)" ';                          // Referer
@@ -98,7 +98,7 @@ class ReposasLogfileParser {
         $this->RegExp.='([^ ]*) ';                                 // Remote logname
         $this->RegExp.='([^ ]*) ';                                 // Remote user
         $this->RegExp.='\[([^\]]*)\] ';                            // Time the request was received
-        $this->RegExp.='"([^ ]*) ([^ ]*) (HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL, http Protokoll
+        $this->RegExp.='"([^ ]*) ([^ ]*)\s+(HTTP\/[1,2]\.[0,1])" ';  // http Method, request URL, http Protokoll
         $this->RegExp.='(\d\d\d) ';                                // http Status Code
         $this->RegExp.='([0-9-]+) ';                               // Size of response in bytes
         $this->RegExp.='"([^"]*)" ';                               // Referer
