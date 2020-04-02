@@ -12,8 +12,8 @@ class FilterHttpStatus
     public function edit(& $convertedLogline)
     {
         $httpStatus = $convertedLogline->httpStatusCode;
-        //TODO: Why 2 times the same http status?
-        if (! ($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 202)) {
+        
+        if (! ($httpStatus == 200 || $httpStatus == 202 || $httpStatus == 206)) {
             $convertedLogline->subjects[] = "epusta:filter:httpStatus";
         }
     }
