@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $configuration = new \epusta\Configuration();
 $config = $configuration->getConfig();
 $convertedLoglineParser = new epusta\ConvertedLoglineParser();
-$mirToolbox = new epusta\Mycore\MIRToolbox($config);
+$mirToolbox = new epusta\MyCoRe\MIRToolbox($config);
 
 while (!feof(STDIN)) {
     if ($line = trim(fgets(STDIN))) {
