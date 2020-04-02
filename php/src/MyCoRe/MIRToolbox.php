@@ -1,8 +1,8 @@
 <?php
 
-namespace epusta\Mycore;
+namespace epusta\MyCoRe;
 
-use epusta\Mycore;
+use epusta\MyCoRe;
 
 class MIRToolbox
 {

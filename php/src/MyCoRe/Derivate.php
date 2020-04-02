@@ -1,6 +1,6 @@
 <?php
 
-namespace epusta\Mycore;
+namespace epusta\MyCoRe;
 
 class Derivate
 {
