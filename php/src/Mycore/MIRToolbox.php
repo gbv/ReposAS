@@ -24,8 +24,8 @@ class MIRToolbox
         $this->logger = $logger;
         $this->cache = [];
         $this->lastDerivate = "";
-        $this->mycoreDerivateFactory = new Mycore\DerivateFactory($config);
-        $this->mycoreObjectFactory = new Mycore\ObjectFactory($config);
+        $this->mycoreDerivateFactory = new MyCoRe\DerivateFactory($config);
+        $this->mycoreObjectFactory = new MyCoRe\MyCoReObjectFactory($config);
     }
 
     public function addIdentifier(& $convertedLogline)
@@ -84,10 +84,8 @@ class MIRToolbox
 
                 return false;
             }
-            if (strpos(
-                $referer,
-                "pdf.worker.js"
-            ) !== false || strpos($referer, "pdf.min.worker.js") !== false) {
+            if (strpos( $referer, "pdf.worker.js") !== false 
+                || strpos($referer, "pdf.min.worker.js") !== false) {
                 //fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
 
                 return false;

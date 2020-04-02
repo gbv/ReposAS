@@ -2,7 +2,7 @@
 
 namespace epusta\Mycore;
 
-class Object
+class MyCoReObject
 {
 
     public $objectid = null;

@@ -1,8 +1,8 @@
 <?php
 
-namespace epusta\Mycore;
+namespace epusta\MyCoRe;
 
-class ObjectFactory extends AbstractFactory
+class MyCoReObjectFactory extends AbstractFactory
 {
 
     private $config = null;
@@ -61,7 +61,7 @@ class ObjectFactory extends AbstractFactory
             return null;
         }
 
-        $this->cache[$objectid] = new Object($objectid, $parentid, $doi, $urn);
+        $this->cache[$objectid] = new MyCoReObject($objectid, $parentid, $doi, $urn);
         return $this->cache[$objectid];
     }
 }
