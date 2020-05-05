@@ -1,6 +1,6 @@
 <?php
 
-namespace epusta\MyCoRe;
+namespace epusta\mir;
 
 class DerivateFactory extends AbstractFactory
 {

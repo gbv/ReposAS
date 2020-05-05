@@ -1,8 +1,8 @@
 <?php
 
-namespace epusta\MyCoRe;
+namespace epusta\mir;
 
-use epusta\MyCoRe;
+use epusta\mir;
 
 class MIRToolbox
 {
@@ -24,8 +24,8 @@ class MIRToolbox
         $this->logger = $logger;
         $this->cache = [];
         $this->lastDerivate = "";
-        $this->mycoreDerivateFactory = new MyCoRe\DerivateFactory($config);
-        $this->mycoreObjectFactory = new MyCoRe\MyCoReObjectFactory($config);
+        $this->mycoreDerivateFactory = new mir\DerivateFactory($config);
+        $this->mycoreObjectFactory = new mir\MyCoReObjectFactory($config);
     }
 
     public function addIdentifier(& $convertedLogline)

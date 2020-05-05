@@ -4,7 +4,7 @@ namespace epustaTest;
 
 use epusta\ConvertedLogline;
 use epusta\ConvertedLoglineParser;
-use epusta\Mycore\MIRToolbox;
+use epusta\mir\MIRToolbox;
 use epusta\Configuration;
 
 class MIRToolboxTest extends \PHPUnit\Framework\TestCase
