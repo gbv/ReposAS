@@ -13,17 +13,16 @@ class MyCoReObjectFactory extends AbstractFactory
         $this->config = $config;
     }
 
-    public function create($objectid)
+    public function create($mcrobjectid)
     {
-        if (isset($this->cache[$objectid])) {
-            return $this->cache[$objectid];
+        if (isset($this->cache[$mcrobjectid])) {
+            return $this->cache[$mcrobjectid];
         }
 
-        $parentid = null;
-        $doi = null;
-        $urn = null;
-        // TODO doc-var is not used -> Did we need this here?
-        $doc = new \DOMDocument();
+        $parentids = null;
+        $objectids = [];
+        $objectids[] = $mcrobjectid;
+
         if ($this->config['getmethod'] == 'file') {
             $path = $this->config['datadir'] . '/' . $this->getFilePathById($objectid) . '/' . $objectid . '.xml';
         } else {
@@ -38,30 +37,37 @@ class MyCoReObjectFactory extends AbstractFactory
 
         if ($nodename == "mycoreobject") {
             $xpath = new \DOMXpath($doc);
-            $elements = $xpath->query("/mycoreobject/structure/parents/parent");
-            $element = $elements->item(0);
-
-            if ($element) {
-                $parentid = $element->getAttribute("xlink:href");
-            }
             $xpath->registerNamespace('mods', "http://www.loc.gov/mods/v3");
-            $elements = $xpath->query("//mods:mods/mods:identifier[@type='urn']");
-            $element = $elements->item(0);
 
-            if ($element) {
-                $urn = $element->nodeValue;
+            $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']");
+            foreach ($elements as $element) {
+                $parentids[] = $element->getAttribute("xlink:href");
             }
-            $elements = $xpath->query("//mods:mods/mods:identifier[@type='doi']");
-            $element = $elements->item(0);
 
-            if ($element) {
-                $doi = $element->nodeValue;
+            $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']/mods:identifier[@type='urn' or @type='doi']");
+            foreach ($elements as $element) {
+                $parentids[] = $element->nodeValue;
+            }
+
+            $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']");
+            foreach ($elements as $element) {
+                $parentids[] = $element->getAttribute("xlink:href");
+            }
+
+            $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:identifier[@type='urn' or @type='doi']");
+            foreach ($elements as $element) {
+                $parentids[] = $element->getAttribute("xlink:href");
+            }
+
+            $elements = $xpath->query("//mods:mods/mods:identifier[@type='urn' or @type='doi']");
+            foreach ($elements as $element) {
+                $objectids[] = $element->nodeValue;
             }
         } else {
             return null;
         }
 
-        $this->cache[$objectid] = new MyCoReObject($objectid, $parentid, $doi, $urn);
+        $this->cache[$objectid] = new MyCoReObject($objectid, $parentid);
         return $this->cache[$objectid];
     }
 }

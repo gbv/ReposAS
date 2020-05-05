@@ -5,35 +5,18 @@ namespace epusta\MyCoRe;
 class MyCoReObject
 {
 
-    public $objectid = null;
-    public $parentid = null;
-    public $urn = null;
-    public $doi = null;
+    public $objectids = null;
+    public $parentids = null;
 
-    public function __construct($objectid, $parentid, $doi, $urn)
+    public function __construct($objectids, $parentids)
     {
-        $this->objectid = $objectid;
-        $this->parentid = $parentid;
-        $this->doi = $doi;
-        $this->urn = $urn;
+        $this->objectids = (is_array($objectids)) $objectids : [];
+        $this->parentids = (is_array($parentids)) $parentids : [];
+        ;
     }
 
     public function getAllIdentifier()
     {
-        $ret = [];
-        if ($this->parentid) {
-            $ret[] = $this->parentid;
-        }
-        if ($this->objectid) {
-            $ret[] = $this->objectid;
-        }
-        if ($this->urn) {
-            $ret[] = $this->urn;
-        }
-        if ($this->doi) {
-            $ret[] = "doi:" . $this->doi;
-        }
-
-        return $ret;
+        return array_merge($this->objectids, $this->parentids);
     }
 }

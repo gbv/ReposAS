@@ -84,7 +84,7 @@ class MIRToolbox
 
                 return false;
             }
-            if (strpos( $referer, "pdf.worker.js") !== false 
+            if (strpos($referer, "pdf.worker.js") !== false
                 || strpos($referer, "pdf.min.worker.js") !== false) {
                 //fwrite(STDERR, "nur Ansicht(pdfWorker).\n");
 
