@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Change to PHP7.0
-        run: sudo update-alternatives --set php /usr/bin/php7.0
+        run: sudo update-alternatives --set php /usr/bin/php7.3
 
       - name: Install Composer and Dependencies
         run: curl -s http://getcomposer.org/installer | php && php composer.phar self-update && php composer.phar install
