@@ -10,13 +10,23 @@ class MyCoReObject
 
     public function __construct($objectids, $parentids)
     {
-        $this->objectids = (is_array($objectids)) $objectids : [];
-        $this->parentids = (is_array($parentids)) $parentids : [];
+        $this->objectids = (is_array($objectids)) ? $objectids : [];
+        $this->parentids = (is_array($parentids)) ? $parentids : [];
         ;
     }
 
     public function getAllIdentifier()
     {
         return array_merge($this->objectids, $this->parentids);
+    }
+    
+    public function getObjectIdentifier()
+    {
+        return $this->objectids;
+    }
+    
+    public function getParentIdentifier()
+    {
+        return $this->parentids;
     }
 }

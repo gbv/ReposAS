@@ -24,9 +24,9 @@ class MyCoReObjectFactory extends AbstractFactory
         $objectids[] = $mcrobjectid;
 
         if ($this->config['getmethod'] == 'file') {
-            $path = $this->config['datadir'] . '/' . $this->getFilePathById($objectid) . '/' . $objectid . '.xml';
+            $path = $this->config['datadir'] . '/' . $this->getFilePathById($mcrobjectid) . '/' . $mcrobjectid . '.xml';
         } else {
-            $path = $this->config['url_prefix'] . "/api/v1/objects/" . $objectid;
+            $path = $this->config['url_prefix'] . "/api/v1/objects/" . $mcrobjectid;
         }
 
         $doc = $this->getDOMByURL($path);
@@ -56,7 +56,7 @@ class MyCoReObjectFactory extends AbstractFactory
 
             $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']/mods:relatedItem[@type='host' or @type='series']/mods:identifier[@type='urn' or @type='doi']");
             foreach ($elements as $element) {
-                $parentids[] = $element->getAttribute("xlink:href");
+                $parentids[] = $element->nodeValue;
             }
 
             $elements = $xpath->query("//mods:mods/mods:identifier[@type='urn' or @type='doi']");
@@ -67,7 +67,7 @@ class MyCoReObjectFactory extends AbstractFactory
             return null;
         }
 
-        $this->cache[$objectid] = new MyCoReObject($objectid, $parentid);
-        return $this->cache[$objectid];
+        $this->cache[$mcrobjectid] = new MyCoReObject($objectids, $parentids);
+        return $this->cache[$mcrobjectid];
     }
 }

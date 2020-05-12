@@ -11,17 +11,17 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
 {
     private $mirToolbox;
     private $convertedLoglineParser;
-    private $testFile;
+    //private $testFile;
 
     public function setUp()
     {
         parent::setUp();
         $configuration = new Configuration();
-        $config = $configuration->getConfig();
+        $config = $configuration->getPhpUnitConfig();
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
 
-        $this->testFile = fopen(__DIR__ . "/../ressources/epustaLoglineWithoutIdentifiersAndSubjects.log", "r");
+        //$this->testFile = fopen(__DIR__ . "/../ressources/epustaLoglineWithoutIdentifiersAndSubjects.log", "r");
     }
 
     /**

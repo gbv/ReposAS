@@ -63,13 +63,6 @@ class MIRToolbox
 
                 return true;
             }
-        } elseif ($this->config['oldMirLogs'] === true && preg_match(
-            '/\/servlets\/solr.+?&rows=1.+?XSL.Style=browse.*/',
-            $path,
-            $match
-        )) {
-            // TODO: Die ist eine nicht so gute Idee
-            die("oldMirLogs not longer supported\n");
         } elseif (preg_match(
             '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
             $path,

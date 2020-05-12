@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mycoreobject xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="datamodel-mods.xsd" 
+    ID="test_mods_00000001" 
+    label="test_mods_00000001" 
+    >
+  <structure>
+    <parents class="MCRMetaLinkID">
+      <parent inherited="0" xlink:type="locator" xlink:href="test_mods_00000002"/>
+    </parents>
+  </structure>
+  <metadata>
+    <def.modsContainer class="MCRMetaXML" heritable="false" notinherit="true">
+      <modsContainer inherited="0">
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3">
+          <mods:identifier type="urn">urn:nbn:de:test:1-1</mods:identifier>
+          <mods:identifier type="doi">11111/11111-0</mods:identifier>
+          <mods:relatedItem type="host" xlink:href="test_mods_00000002" xlink:type="simple">
+            <mods:identifier type="urn">urn:nbn:de:test:2-5</mods:identifier>
+            <mods:identifier type="doi">22222/22222-0</mods:identifier>
+            <mods:relatedItem type="series" xlink:href="test_mods_00000003" xlink:type="simple">
+              <mods:identifier type="urn">urn:nbn:de:test:3-9</mods:identifier>
+              <mods:identifier type="doi">33333/33333-0</mods:identifier>
+            </mods:relatedItem>
+          </mods:relatedItem>
+        </mods:mods>
+      </modsContainer>
+    </def.modsContainer>
+  </metadata>
+</mycoreobject>
