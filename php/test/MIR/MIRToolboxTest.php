@@ -11,7 +11,7 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
 {
     private $mirToolbox;
     private $convertedLoglineParser;
-    //private $testFile;
+    private $testFile;
 
     public function setUp()
     {
@@ -20,17 +20,27 @@ class MIRToolboxTest extends \PHPUnit\Framework\TestCase
         $config = $configuration->getPhpUnitConfig();
         $this->mirToolbox = new MIRToolbox($config);
         $this->convertedLoglineParser = new ConvertedLoglineParser();
-
-        //$this->testFile = fopen(__DIR__ . "/../ressources/epustaLoglineWithoutIdentifiersAndSubjects.log", "r");
+        
+        $logfile=__DIR__."/../ressources/mir-identifier-css.log";
+        $this->assertTrue(is_readable($logfile),"Fail to read file mir-identifier-css.log");
+        $this->testFile = fopen($logfile , "r");
+         
     }
 
     /**
      * Because there is a failure, if there is an empty test-class, here a dummy test.
      * This class needs some ressources to be tested, so we need to wait for them.
-     * TODO: Test this class
+     * Test the CSS Hack
      */
-    public function testDummy()
+    public function testGetIdentifierFromCSSHack()
     {
-        $this->assertEquals(1, 1);
+        $logline = new ConvertedLogline();
+        
+        $testline = trim(fgets($this->testFile));
+        
+        $this->convertedLoglineParser->parse($testline, $logline);
+        $this->mirToolbox->addIdentifier($logline);
+        $this->assertContains("test_mods_00000001", $logline->identifier, "MyCoReID not parsed from css call - test_mods_00000001 is missed in array of identifier: \n".print_r($logline->identifier,true));
+            
     }
 }

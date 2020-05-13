@@ -162,7 +162,7 @@ class MIRToolbox
             //Add URN
             $urn = $derivate->urn;
             if ($urn) {
-                $convertedLogline->identifier = $urn;
+                $convertedLogline->identifier[] = $urn;
             }
         } else {
             return false;

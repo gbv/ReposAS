@@ -57,7 +57,6 @@ class MyCoReObjectFactoryTest extends \PHPUnit\Framework\TestCase
     public function testParentIdentifier()
     {
         $identifier = $this->mcrObject->getParentIdentifier();
-        fwrite(STDERR, print_r($identifier, TRUE));
         $this->assertContains("test_mods_00000002", $identifier, "Parent MyCoReID is missed in list of identifier");
         $this->assertContains("22222/22222-0", $identifier, "Parent DOI is missed in list of identifier");
         $this->assertContains("urn:nbn:de:test:2-5", $identifier, "Parent  URN is missed in list of identifier");
