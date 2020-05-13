@@ -41,7 +41,7 @@ class MyCoReObjectFactory extends AbstractFactory
 
             $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']");
             foreach ($elements as $element) {
-                $parentids[] = $element->getAttribute("xlink:href");
+                if ($element->getAttribute("xlink:href")) $parentids[] = $element->getAttribute("xlink:href");
             }
 
             $elements = $xpath->query("//mods:mods/mods:relatedItem[@type='host' or @type='series']/mods:identifier[@type='urn' or @type='doi']");

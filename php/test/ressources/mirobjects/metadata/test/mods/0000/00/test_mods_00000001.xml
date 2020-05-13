@@ -23,6 +23,8 @@
               <mods:identifier type="doi">33333/33333-0</mods:identifier>
             </mods:relatedItem>
           </mods:relatedItem>
+          <mods:relatedItem type="series" xlink:type="simple">
+          </mods:relatedItem>
         </mods:mods>
       </modsContainer>
     </def.modsContainer>

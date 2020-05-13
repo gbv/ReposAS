@@ -44,6 +44,8 @@ class MyCoReObjectFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("test_mods_00000003", $identifier, "Grandparent MyCoReID is missed in list of identifier");
         $this->assertContains("33333/33333-0", $identifier, "Grandparent DOI is missed in list of identifier");
         $this->assertContains("urn:nbn:de:test:3-9", $identifier, "Grandparent  URN is missed in list of identifier");
+        // Errors
+        $this->assertNotContains("", $identifier, "emptyIdentifier found - possibible reason: relItem without href is parsed");
     }
     
     public function testObjectIdentifier()
@@ -52,6 +54,7 @@ class MyCoReObjectFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("test_mods_00000001", $identifier, "MyCoReID is missed in list of identifier");
         $this->assertContains("11111/11111-0", $identifier, "DOI is missed in list of identifier");
         $this->assertContains("urn:nbn:de:test:1-1", $identifier, "URN is missed in list of identifier");
+        
     }
     
     public function testParentIdentifier()
