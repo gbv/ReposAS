@@ -45,7 +45,7 @@ class MIRToolbox
             if ($object) {
                 $convertedLogline->identifier = $object->getAllIdentifier();
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
-
+                $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
                 return true;
             }
         } elseif (preg_match(
@@ -60,7 +60,7 @@ class MIRToolbox
             if ($object) {
                 $convertedLogline->identifier = $object->getAllIdentifier();
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
-
+                $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
                 return true;
             }
         } elseif (preg_match(
@@ -107,7 +107,7 @@ class MIRToolbox
                 //fwrite(STDERR, " ObjectID: ".$objectid."\n");
                 $object = $this->mycoreObjectFactory->create($objectid);
                 $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
-
+                $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
                 //Add URN
                 $urn = $derivate->urn;
                 if ($urn) {
@@ -137,6 +137,7 @@ class MIRToolbox
             //fwrite(STDERR, "Object:".$objectid."\n");
             $object = $this->mycoreObjectFactory->create($objectid);
             $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
+            $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
             //Add URN
             $urn = $derivate->urn;
             if ($urn) {
@@ -159,6 +160,7 @@ class MIRToolbox
             $objectid = $derivate->objectid;
             $object = $this->mycoreObjectFactory->create($objectid);
             $convertedLogline->identifier = array_merge($object->getAllIdentifier(), $convertedLogline->identifier);
+            $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
             //Add URN
             $urn = $derivate->urn;
             if ($urn) {
