@@ -21,7 +21,8 @@ class MyCoReObjectFactory extends AbstractFactory
 
         $parentids = null;
         $objectids = [];
-        $objectids[] = $mcrobjectid;
+	$objectids[] = $mcrobjectid;
+	$subjects = [];
 
         if ($this->config['getmethod'] == 'file') {
             $path = $this->config['datadir'] . '/' . $this->getFilePathById($mcrobjectid) . '/' . $mcrobjectid . '.xml';
@@ -62,12 +63,18 @@ class MyCoReObjectFactory extends AbstractFactory
             $elements = $xpath->query("//mods:mods/mods:identifier[@type='urn' or @type='doi']");
             foreach ($elements as $element) {
                 $objectids[] = $element->nodeValue;
+	    }
+	    $elements = $xpath->query("//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']");
+	    foreach ($elements as $element) {
+                $valueURI=$element->getAttribute("valueURI");
+                $genre=substr($valueURI, strpos($valueURI, "#") + 1); 
+                $subjects[] = "mir_genre:".$genre;
             }
         } else {
             return null;
         }
 
-        $this->cache[$mcrobjectid] = new MyCoReObject($objectids, $parentids);
+        $this->cache[$mcrobjectid] = new MyCoReObject($objectids, $parentids,$subjects);
         return $this->cache[$mcrobjectid];
     }
 }
