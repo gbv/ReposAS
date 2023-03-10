@@ -12,7 +12,7 @@ class FilterHttpMethod
     {
         $httpMethod = $convertedLogline->httpMethod;
         if ($httpMethod != 'GET') {
-            $convertedLogline->Subjects[] = "epusta:filter:httpMethod";
+            $convertedLogline->subjects[] = "epusta:filter:httpMethod";
         }
     }
 }
