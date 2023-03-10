@@ -10,7 +10,9 @@ class Configuration
     public function __construct()
     {
         $configPath = __DIR__ . '/../../config/config.ini';
-        $this->config = parse_ini_file($configPath);
+        if (is_file ($configPath) ) {
+            $this->config = parse_ini_file($configPath);
+        }
         $configPath = __DIR__ . '/../../config/config.phpunit.ini';
         $this->configPhpUnit = parse_ini_file($configPath);
     }
