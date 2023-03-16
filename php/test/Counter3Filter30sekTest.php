@@ -36,23 +36,26 @@ class Counter3Filter30sekTest extends \PHPUnit\Framework\TestCase
         
         $this->convertedLoglineParser->parse($testline1, $logline);
         $this->counter3Filter30sek->edit($logline);
-        $this->assertNotContains("filter:30sek:counter3", $logline->subjects, "Line 1 : filter:30sek:counter3 schouldn't present in subjects.");
+        $this->assertNotContains("filter:30sek:counter3", $logline->subjects, "Line 1 : filter:30sek:counter3 shouldn't present in subjects.");
         
         $this->convertedLoglineParser->parse($testline2, $logline);
         $this->counter3Filter30sek->edit($logline);
-        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 2 : filter:30sek:counter3 schould present in subjects.");
+        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 2 : filter:30sek:counter3 should present in subjects.");
         
         $this->convertedLoglineParser->parse($testline3, $logline);
         $this->counter3Filter30sek->edit($logline);
-        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 3 : filter:30sek:counter3 schould present in subjects.");
+        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 3 : filter:30sek:counter3 should present in subjects.");
+        $count_values=array_count_values($logline->subjects);
+        $this->assertFalse($count_values['filter:30sek:counter3'] > 1,"Line 3 : More than one filter:30sek:counter3 shouldn't present in subjects.");
+        
         
         $this->convertedLoglineParser->parse($testline4, $logline);
         $this->counter3Filter30sek->edit($logline);
-        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 4 : filter:30sek:counter3 schould present in subjects.");
+        $this->assertContains("filter:30sek:counter3", $logline->subjects, "Line 4 : filter:30sek:counter3 should present in subjects.");
         
         $this->convertedLoglineParser->parse($testline5, $logline);
         $this->counter3Filter30sek->edit($logline);
-        $this->assertNotContains("filter:30sek:counter3", $logline->subjects, "Line 5 : filter:30sek:counter3 schould present in subjects.");
+        $this->assertNotContains("filter:30sek:counter3", $logline->subjects, "Line 5 : filter:30sek:counter3 should present in subjects.");
         
     }
 }

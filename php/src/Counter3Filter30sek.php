@@ -34,7 +34,9 @@ class Counter3Filter30sek
                         (count($identifier) > 0 && count(array_diff($identifier, $lastHit['identifier'])) == 0)
                     )
                 ) {
-                    $convertedLogline->subjects[] = "filter:30sek:counter3";
+                    if (! in_array("filter:30sek:counter3",$convertedLogline->subjects)) {
+                        $convertedLogline->subjects[] = "filter:30sek:counter3";
+                    }
                 }
             }
         }
