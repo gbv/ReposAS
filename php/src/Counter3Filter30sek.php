@@ -14,6 +14,7 @@ class Counter3Filter30sek
 
     public function edit(& $convertedLogline)
     {
+        $uuid = $convertedLogline->uuid;
         $ip = $convertedLogline->ip;
         $path = $convertedLogline->url;
         $time = $convertedLogline->time;
@@ -21,8 +22,9 @@ class Counter3Filter30sek
         $unixtime = strtotime($time);
 
         // delete old entrys
-        while (count($this->lastHits) > 0 && $unixtime - key($this->lastHits) > 30) {
-            array_shift($this->lastHits);
+        while (count($this->lastHits) > 0 && intval($unixtime) - intval(key($this->lastHits)) > 30) {
+            //array_shift($this->lastHits);
+            unset($this->lastHits[key($this->lastHits)]);
         }
         // Find duplicate entry
         foreach ($this->lastHits as $lastHitsForSec) {
