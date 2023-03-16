@@ -64,7 +64,8 @@ class MyCoReObjectFactory extends AbstractFactory
             foreach ($elements as $element) {
                 $objectids[] = $element->nodeValue;
 	    }
-	    $elements = $xpath->query("//mods:mods/mods:genre[@authorityURI='http://www.mycore.org/classifications/mir_genres']");
+	    //$elements = $xpath->query("//mods:mods/mods:genre[@type='intern']");
+	    $elements = $xpath->query("//mods:mods/mods:genre[contains(@authorityURI, 'classifications/genres') or contains(@authorityURI, 'classifications/mir_genres')]");
 	    foreach ($elements as $element) {
                 $valueURI=$element->getAttribute("valueURI");
                 $genre=substr($valueURI, strpos($valueURI, "#") + 1); 

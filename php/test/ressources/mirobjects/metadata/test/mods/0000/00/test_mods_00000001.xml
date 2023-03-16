@@ -25,6 +25,8 @@
           </mods:relatedItem>
           <mods:relatedItem type="series" xlink:type="simple">
           </mods:relatedItem>
+          <mods:genre type="intern" authorityURI="https://test.de/classifications/genres" valueURI="https://test.de/classifications/genres#dissertation"/>
+          <mods:genre type="intern" authorityURI="https://test.de/classifications/mir_genres" valueURI="https://test.de/classifications/genres#blog"/>
         </mods:mods>
       </modsContainer>
     </def.modsContainer>

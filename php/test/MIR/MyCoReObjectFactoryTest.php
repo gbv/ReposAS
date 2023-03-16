@@ -6,7 +6,7 @@ use epusta\Configuration;
 use epusta\mir\MyCoReObjectFactory;
 
 /**
- * This class test extraction of the Identifers für an MyCoRe Object direct vom the xml Files.
+ * This class test extraction of the Identifers fï¿½r an MyCoRe Object direct vom the xml Files.
  * The test use dummy xml Files for test_mods_0000001.xml. 
  * 
  */
@@ -67,5 +67,12 @@ class MyCoReObjectFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertContains("test_mods_00000003", $identifier, "Grandparent MyCoReID is missed in list of identifier");
         $this->assertContains("33333/33333-0", $identifier, "Grandparent DOI is missed in list of identifier");
         $this->assertContains("urn:nbn:de:test:3-9", $identifier, "Grandparent  URN is missed in list of identifier");
+    }
+    
+    public function testGenre()
+    {
+        $subjects = $this->mcrObject->getSubjects();
+        $this->assertContains("mir_genre:dissertation", $subjects, "mir_genre:dissertation is missed in list of subjects");
+        $this->assertContains("mir_genre:blog", $subjects, "mir_genre:blog is missed in list of subjects");
     }
 }
