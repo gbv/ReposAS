@@ -25,11 +25,12 @@ class MyCoReObjectFactory extends AbstractFactory
 	    $subjects = [];
 
         if ($this->config['getmethod'] == 'file') {
-            $path = $this->config['datadir'] . '/' . $this->getFilePathById($mcrobjectid) . '/' . $mcrobjectid . '.xml';
-            if (! is_file($path)) {
+            if (! is_dir($this->config['datadir'])) {
                 // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MyCoReObjectFactory - File dont' exsists. ".$path."\n");
+                fwrite(STDERR, "MyCoReObjectFactory - Configured directory don't exists. ".$this->config['datadir']."\n");
             }
+            $path = $this->config['datadir'] . '/' . $this->getFilePathById($mcrobjectid) . '/' . $mcrobjectid . '.xml';
+            
         } else {
             $path = $this->config['url_prefix'] . "/api/v1/objects/" . $mcrobjectid;
         }

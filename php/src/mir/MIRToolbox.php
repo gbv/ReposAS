@@ -47,10 +47,7 @@ class MIRToolbox
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
                 $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
                 return true;
-            } else {
-                // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MIRToolbox - Can't get metadata from object. ".$match[1]."\n");
-            }
+            } 
         } elseif (preg_match(
             '/\/receive\/([^\/]+_[^\/]+_[0-9]{8})(;jsessionid.+|$)/',
             $path,
@@ -65,10 +62,7 @@ class MIRToolbox
                 $convertedLogline->subjects[] = "oas:content:counter_abstract";
                 $convertedLogline->subjects = array_merge($object->getSubjects(), $convertedLogline->subjects);
                 return true;
-            } else {
-                // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MIRToolbox - Can't get metadata from object. ".$match[1]."\n");
-            }
+            } 
         } elseif (preg_match(
             '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
             $path,
@@ -98,8 +92,6 @@ class MIRToolbox
             $this->lastDerivate = $derivateid;
             $derivate = $this->mycoreDerivateFactory->create($derivateid);
             if ($derivate == null) {
-                // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MIRToolbox - Can't get metadata from derivate. ".$derivateid."\n");
                 return false;
             }
             $maindoc = $derivate->maindoc;
@@ -138,8 +130,6 @@ class MIRToolbox
             $convertedLogline->subjects[] = "oas:content:counter";
             $derivate = $this->mycoreDerivateFactory->create($derivateid);
             if ($derivate == null) {
-                // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MIRToolbox - Can't get metadata from derivate. ".$derivateid."\n");
                 return false;
             }
             $convertedLogline->identifier[] = $derivateid;
@@ -164,8 +154,6 @@ class MIRToolbox
             $convertedLogline->subjects[] = "oas:content:counter";
             $derivate = $this->mycoreDerivateFactory->create($derivateid);
             if ($derivate == null) {
-                // Temp - print a notice for user. Replace after intruducing a correct error handling.
-                fwrite(STDERR, "MIRToolbox - Can't get metadata from derivate. ".$derivateid."\n");
                 return false;
             }
             $convertedLogline->identifier[] = $derivateid;
