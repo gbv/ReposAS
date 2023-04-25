@@ -21,11 +21,15 @@ class MyCoReObjectFactory extends AbstractFactory
 
         $parentids = null;
         $objectids = [];
-	$objectids[] = $mcrobjectid;
-	$subjects = [];
+	    $objectids[] = $mcrobjectid;
+	    $subjects = [];
 
         if ($this->config['getmethod'] == 'file') {
             $path = $this->config['datadir'] . '/' . $this->getFilePathById($mcrobjectid) . '/' . $mcrobjectid . '.xml';
+            if (! is_file($path)) {
+                // Temp - print a notice for user. Replace after intruducing a correct error handling.
+                fwrite(STDERR, "MyCoReObjectFactory - File dont' exsists. ".$path."\n");
+            }
         } else {
             $path = $this->config['url_prefix'] . "/api/v1/objects/" . $mcrobjectid;
         }
