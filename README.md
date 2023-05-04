@@ -7,7 +7,7 @@ This is a framework to provide Usage Statistics for repsitorys.
 - php 7.4
 - composer
 
-## Instalation:
+## Installation:
 
     git clone https://github.com/gbv/ePuSta-logfileparser.git .
     composer prepare
