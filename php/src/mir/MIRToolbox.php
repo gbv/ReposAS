@@ -32,9 +32,11 @@ class MIRToolbox
     {
         $path = $convertedLogline->url;
         $referer = $convertedLogline->referer;
-
+        $mycoreIdPattern = (isset($this->config['mycoreIdPattern']) ? $this->config['mycoreIdPattern'] : '([^\/]+_[^\/]+_[0-9]{8})' );
+        $derivateIdPattern = (isset($this->config['derivateIdPattern']) ? $this->config['derivateIdPattern'] : '([^\/]+_derivate_[0-9]{8})' );
+        
         if (preg_match(
-            '/\/rsc\/stat\/([^\/]+_[^\/]+_[0-9]{8}).css$/',
+            '/\/rsc\/stat\/'.$mycoreIdPattern.'.css$/',
             $path,
             $match
         )) {
@@ -49,7 +51,7 @@ class MIRToolbox
                 return true;
             } 
         } elseif (preg_match(
-            '/\/receive\/([^\/]+_[^\/]+_[0-9]{8})(;jsessionid.+|$)/',
+            '/\/receive\/'.$mycoreIdPattern.'(;jsessionid.+|$)/',
             $path,
             $match
         )) {
@@ -64,7 +66,7 @@ class MIRToolbox
                 return true;
             } 
         } elseif (preg_match(
-            '/\/MCRFileNodeServlet\/([^\/]+_derivate_[0-9]+)\/([^;?]+)(;jsessionid)?([?]view)?.*/',
+            '/\/MCRFileNodeServlet\/'.$derivateIdPattern.'\/([^;?]+)(;jsessionid)?([?]view)?.*/',
             $path,
             $match
         )) {
@@ -120,7 +122,7 @@ class MIRToolbox
                 return false;
             }
         } elseif (preg_match(
-            '/\/MCRZipServlet\/([^\/]+_derivate_[0-9]+)(;jsessionid)?.*/',
+            '/\/MCRZipServlet\/'.$derivateIdPattern.'(;jsessionid)?.*/',
             $path,
             $match
         )) {
@@ -144,7 +146,7 @@ class MIRToolbox
                 $convertedLogline->identifier = $urn;
             }
         } elseif (preg_match(
-            '/\/rsc\/pdf\/([^\/]+_derivate_[0-9]+)[?]pages=1-\d+$/',
+            '/\/rsc\/pdf\/'.$derivateIdPattern.'[?]pages=1-\d+$/',
             $path,
             $match
         )) {
