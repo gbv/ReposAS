@@ -32,9 +32,9 @@ class MIRToolbox
     {
         $path = $convertedLogline->url;
         $referer = $convertedLogline->referer;
-        $mycoreIdPattern = (isset($config['mycoreIdPattern']) ? $config['mycoreIdPattern'] : '([^\/]+_[^\/]+_[0-9]{8})' );
-        $derivateIdPattern = (isset($config['derivateIdPattern']) ? $config['derivateIdPattern'] : '([^\/]+_derivate_[0-9]{8})' );
-
+        $mycoreIdPattern = (isset($this->$config['mycoreIdPattern']) ? $this->$config['mycoreIdPattern'] : '([^\/]+_[^\/]+_[0-9]{8})' );
+        $derivateIdPattern = (isset($this->$config['derivateIdPattern']) ? $this->$config['derivateIdPattern'] : '([^\/]+_derivate_[0-9]{8})' );
+        
         if (preg_match(
             '/\/rsc\/stat\/'.$mycoreIdPattern.'.css$/',
             $path,
