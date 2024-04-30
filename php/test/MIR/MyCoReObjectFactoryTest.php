@@ -16,7 +16,7 @@ class MyCoReObjectFactoryTest extends \PHPUnit\Framework\TestCase
     private $mcrObject;
         
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $configuration = new Configuration();

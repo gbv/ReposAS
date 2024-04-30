@@ -12,7 +12,7 @@ class Counter3Filter30sekTest extends \PHPUnit\Framework\TestCase
     private $counter3Filter30sek;
     private $testFile;
     
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->convertedLoglineParser = new ConvertedLoglineParser();

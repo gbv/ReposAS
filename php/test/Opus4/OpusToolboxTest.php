@@ -18,7 +18,7 @@ class OpusToolboxTest extends \PHPUnit\Framework\TestCase
     private $convertedLoglineParser;
     private $testFile;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
